@@ -1,0 +1,8 @@
+.idea
+/logs
+/data
+.env
+/.project
+.docker-sync
+/jenkins/jenkins_home
+docker_origami_review_admin/.env
