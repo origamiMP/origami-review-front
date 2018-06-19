@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/reviews/new', function () {
     return view('welcome');
 });
+
+Route::get('/orders/{id}', 'OrderController@show')->where('id', '[0-9]+');
+
+Route::post('/reviews', 'ReviewController@store');

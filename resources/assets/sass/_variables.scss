@@ -1,6 +1,11 @@
 
 // Body
-$body-bg: #f5f8fa;
+//$body-bg: #f5f8fa;
+$primary: #e72b54;
+$secondary: #ec6828;
+
+$primary-opacity: rgba($primary, .2);
+$secondary-opacity: rgba($secondary, .2);
 
 // Typography
 $font-family-sans-serif: "Raleway", sans-serif;

@@ -7,8 +7,30 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.starrating > input {display: none;}  /* Remove radio buttons */
+
+.starrating > label:before {
+  content: "\f005"; /* Star */
+  margin: 2px;
+  font-size: 3em;
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+.starrating > label
+{
+  color: $primary-opacity; /* Start color when not clicked */
+}
+
+.starrating > input:checked ~ label
+{ color: $primary ; } /* Set yellow color when star checked */
+
+.starrating > input:hover ~ label
+{ color: $primary ;  } /* Set yellow color when star hover */
+
+.btn.btn-secondary-opacity {
+  background-color: $secondary-opacity;
+  border-color: $secondary-opacity;
 }
