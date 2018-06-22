@@ -4,32 +4,37 @@
 
             <div class="col-md-12">
 
-                <h2>Evaluez {{order.marketplace ? order.marketplace.name : ''}}</h2>
+                <h2>Evaluez {{order.marketplace.name}}</h2>
                 <div class="mt-5 mb-5" v-for="criteria in order.marketplace.marketplace_criteria">
 
                     <div class="form-group row">
                         <label class="col-sm-3" style="margin: auto"><h3>{{criteria.name}}</h3></label>
                         <div class="col-sm-9">
                             <div class="starrating risingstar d-flex float-left flex-row-reverse">
-                                <input type="radio" id="star5" name="rating" value="5"/><label for="star5"
-                                                                                               title="5 star"></label>
-                                <input type="radio" id="star4" name="rating" value="4"/><label for="star4"
-                                                                                               title="4 star"></label>
-                                <input type="radio" id="star3" name="rating" value="3"/><label for="star3"
-                                                                                               title="3 star"></label>
-                                <input type="radio" id="star2" name="rating" value="2"/><label for="star2"
-                                                                                               title="2 star"></label>
-                                <input type="radio" id="star1" name="rating" value="1"/><label for="star1"
-                                                                                               title="1 star"></label>
+                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_5'"
+                                       :name="criteria.id" value="5"/><label :for="criteria.id + '_5'"
+                                                                             title="Excellent"></label>
+                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_4'"
+                                       :name="criteria.id" value="4"/><label :for="criteria.id + '_4'"
+                                                                             title="Bon"></label>
+                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_3'"
+                                       :name="criteria.id" value="3"/><label :for="criteria.id + '_3'"
+                                                                             title="Moyen"></label>
+                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_2'"
+                                       :name="criteria.id" value="2"/><label :for="criteria.id + '_2'"
+                                                                             title="Bof"></label>
+                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_1'"
+                                       :name="criteria.id" value="1"/><label :for="criteria.id + '_1'"
+                                                                             title="Mauvais"></label>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Commentaire</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1"
-                              rows="8" name="comment"></textarea>
+                    <label for="comment">Commentaire</label>
+                    <textarea v-model="review.text" class="form-control" id="comment"
+                              rows="8"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="btn-group mr-2" role="group" aria-label="First group">
@@ -59,67 +64,97 @@
 
 
         </form>
+
+        <ModalInstallMetamask :showModal="installMetamaskModalShow" :closeAction="modalMetamaskClose"
+                              :validateAction="modalMetamaskValidate"></ModalInstallMetamask>
+        <ModalEnterMetamaskPassword :showModal="enterMetamaskPasswordModalShow" :closeAction="modalMetamaskClose"
+                                    :validateAction="modalMetamaskValidate"></ModalEnterMetamaskPassword>
+        <SignMetamaskTransactionPassword :showModal="signMetamaskTransactionModalShow"
+                                         :closeAction="modalMetamaskClose"></SignMetamaskTransactionPassword>
     </div>
 
 </template>
 
 <script>
+  import ModalInstallMetamask from './ModalInstallMetamask';
+  import ModalEnterMetamaskPassword from './ModalEnterMetamaskPassword';
+  import SignMetamaskTransactionPassword from './SignMetamaskTransactionPassword';
+
   export default {
     data() {
       return {
+        installMetamaskModalShow: false,
+        enterMetamaskPasswordModalShow: false,
+        signMetamaskTransactionModalShow: false,
         order: {
           marketplace: {
             marketplace_criteria: []
           }
-        }
+        },
+        review: {}
       }
     },
-    created: function () {
-      this.getNewReviewData();
+    beforeCreate() {
+      this.axios.get('/orders/' + this.$route.query.order_id).then((response) => {
+        this.order = response.data;
+      });
     },
-
+    created() {
+      let cookieReview = this.$cookie.get('review');
+      if (cookieReview !== null) {
+        this.review = JSON.parse(cookieReview);
+        this.$cookie.delete('review');
+        this.submitReview();
+      }
+    },
     methods: {
-      getNewReviewData() {
-        this.axios.get('/orders/' + this.$route.query.order_id).then((response) => {
-          this.order = response.data;
-        });
-      },
       submitReview() {
-        let params = JSON.stringify({
-          critere1: 'toto',
-          commentaire: 'tata',
-        });
-
-        let sha3_params = web3.sha3(params);
+        let context = this;
         let router = this.$router;
 
-        web3.eth.sign(web3.eth.accounts[0], sha3_params, function (err, result) {
-          if (err) return console.error(err);
-          console.log('SIGNED:' + result);
-          router.push({name: 'ReviewCreateSuccessComponent'});
+        if (typeof web3 === 'undefined')
+          this.installMetamaskModalShow = true;
+        else if (web3.eth.accounts.length === 0)
+          this.enterMetamaskPasswordModalShow = true;
+        else {
+          let params = JSON.stringify({
+            critere1: 'toto',
+            text: 'tata',
+            rating: 5
+          });
 
-          // $.ajax({
-          //   method: 'POST',
-          //   url: '/reviews',
-          //   headers: {
-          //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          //   },
-          //   data: {
-          //     data: params,
-          //     hash: sha3_params,
-          //     signed_hash: result,
-          //     wallet: web3.eth.accounts[0]
-          //   },
-          //   success: function(data) {
-          //     alert("ok : " + data['response']);
-          //   },
-          //   fail: function(data) {
-          //     alert('ko : ' + data.data);
-          //   }
-          // })
+          context.review.data = params;
+          context.review.hash = web3.sha3(params);
 
-        });
+          this.signMetamaskTransactionModalShow = true;
+          web3.eth.sign(web3.eth.accounts[0], context.review.hash, function (err, result) {
+            if (err) {
+              this.signMetamaskTransactionModalShow = false;
+            } else {
+              context.review.signed_hash = result;
+              context.review.wallet = web3.eth.accounts[0];
+
+              context.axios.post('/reviews', context.review).then((response) => {
+                router.push({name: 'ReviewCreateSuccess'});
+              });
+            }
+          });
+        }
+      },
+      modalMetamaskValidate() {
+        this.$cookie.set('review', JSON.stringify(this.review), {expires: '10m'});
+        window.location.reload()
+      },
+      modalMetamaskClose() {
+        this.installMetamaskModalShow = false;
+        this.enterMetamaskPasswordModalShow = false;
+        this.signMetamaskTransactionModalShow = false;
       }
+    },
+    components: {
+      SignMetamaskTransactionPassword,
+      ModalInstallMetamask,
+      ModalEnterMetamaskPassword
     }
   }
 </script>

@@ -43,6 +43,7 @@ class JsonApiParser
                 $array = [];
                 foreach ($idxs as $cpt => $idx) {
                     $array[$cpt] = $this->response->included[$idx]->attributes;
+                    $array[$cpt]->id = $this->response->included[$idx]->id;
                     if (isset($this->response->included[$idx]->relationships))
                         $array[$cpt] = $this->constructRelationship($this->response->included[$idx]->relationships, $array[$cpt]);
                 }
@@ -50,6 +51,7 @@ class JsonApiParser
             } else {
                 $idx = array_search($key . 's', array_column($this->response->included, 'type'));
                 $context->$key = $this->response->included[$idx]->attributes;
+                $context->$key->id = $this->response->included[$idx]->id;
                 if (isset($this->response->included[$idx]->relationships))
                     $context->$key = $this->constructRelationship($this->response->included[$idx]->relationships, $context->$key);
             }

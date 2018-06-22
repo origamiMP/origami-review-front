@@ -9,13 +9,13 @@ require('./bootstrap');
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VeeValidate from 'vee-validate';
-
-Vue.use(VueRouter);
-Vue.use(VeeValidate);
-
+import VueCookie from 'vue-cookie';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 
+Vue.use(VueRouter);
+Vue.use(VeeValidate);
+Vue.use(VueCookie);
 Vue.use(VueAxios, axios);
 
 import App from './App.vue';
@@ -23,9 +23,9 @@ import ReviewCreateComponent from './components/ReviewCreateComponent.vue';
 import ReviewCreateSuccessComponent from './components/ReviewCreateSuccessComponent';
 
 const routes = [
-  {name: 'ReviewCreateComponent', path: '/reviews/new', component: ReviewCreateComponent},
-  {name: 'ReviewCreateSuccessComponent', path: '/reviews/new/success', component: ReviewCreateSuccessComponent}
+  {name: 'ReviewCreate', path: '/reviews/new', component: ReviewCreateComponent},
+  {name: 'ReviewCreateSuccess', path: '/reviews/new/success', component: ReviewCreateSuccessComponent},
 ];
 
 const router = new VueRouter({mode: 'history', routes: routes});
-new Vue(Vue.util.extend({router}, App)).$mount('#app');
+window.vm = new Vue(Vue.util.extend({router}, App)).$mount('#app');
