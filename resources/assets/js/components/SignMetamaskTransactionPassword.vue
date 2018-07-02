@@ -1,7 +1,7 @@
 <template>
     <modal :showModal="showModal" :closeAction="closeAction">
-        <h1 slot="header">Signez la transaction Metamask</h1>
-        <span slot="body">Vous devez signer la transaction Metamask</span>
+        <h1 slot="header">Sign Metamask Transaction</h1>
+        <span slot="body">You have to sign metamask transaction</span>
     </modal>
 </template>
 

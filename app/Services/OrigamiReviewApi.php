@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
+use App\Exceptions\OrigamiReviewApiException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Origami
@@ -23,8 +23,6 @@ class OrigamiReviewApi
     /**
      * Constructor
      *
-     * @param $api_params
-     * @internal param $api ( parameters of api )
      */
     public function __construct()
     {
@@ -43,7 +41,7 @@ class OrigamiReviewApi
      * @param  string $resource API resource endpoint
      * @param  array|null $params array of parameters
      * @param bool $batch
-     * @return JsonApiParser
+     * @return array|bool
      */
     public function get($resource, array $params = null, $batch = false)
     {
@@ -59,7 +57,7 @@ class OrigamiReviewApi
      * @param  string $resource API resource endpoint
      * @param  array|null $params object to post
      * @param bool $batch
-     * @return JsonApiParser
+     * @return array|bool
      */
     public function post($resource, array $params = null, $batch = false)
     {
@@ -74,7 +72,7 @@ class OrigamiReviewApi
      * @param  string $resource API resource endpoint
      * @param  array|null $params object to put
      * @param bool $batch
-     * @return JsonApiParser
+     * @return array|bool
      */
     public function put($resource, array $params = null, $batch = false)
     {
@@ -88,7 +86,7 @@ class OrigamiReviewApi
      * @param  string $resource API resource endpoint
      * @param  array|null $params object to patch
      * @param bool $batch
-     * @return JsonApiParser
+     * @return array|bool
      */
     public function patch($resource, array $params = null, $batch = false)
     {
@@ -102,7 +100,7 @@ class OrigamiReviewApi
      * @param  string $resource API resource endpoint
      * @param  array|null $params array of parameters
      * @param bool $batch
-     * @return JsonApiParser
+     * @return array|bool
      */
     public function delete($resource, array $params = null, $batch = false)
     {
@@ -125,7 +123,7 @@ class OrigamiReviewApi
      * @param  string $resource api endpoint
      * @param  array|null $params array of parameters
      * @param $batch
-     * @return JsonApiParser
+     * @return array|bool
      */
     protected function callApi($method, $resource, array $params = null, $batch)
     {
@@ -149,7 +147,7 @@ class OrigamiReviewApi
      * @param $method
      * @param $resource
      * @param $params
-     * @return JsonApiParser
+     * @return array
      */
     protected function make_request($method, $resource, $params)
     {
@@ -184,13 +182,12 @@ class OrigamiReviewApi
         } catch (GuzzleException $e) {
         }
 
-        if ($response && $response->getStatusCode() == 401) {
-            session()->forget('access_token');
-            session()->push('logout_error', 'true');
-            Auth::logout();
-            abort(401);
-        }
+        $statusCode = $response->getStatusCode();
         $response = $response->getBody()->getContents();
+
+        if (in_array($statusCode, [400, 422]))
+            throw new OrigamiReviewApiException(json_decode($response), $statusCode);
+
         return (new JsonApiParser())->parse($response);
     }
 }

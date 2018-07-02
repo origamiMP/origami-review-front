@@ -18,13 +18,24 @@ Vue.use(VeeValidate);
 Vue.use(VueCookie);
 Vue.use(VueAxios, axios);
 
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  axios.get('/api/fails').then(function (data) {
+    $("#fails").html(data.data);
+  });
+  return Promise.reject(error);
+});
+
 import App from './App.vue';
 import ReviewCreateComponent from './components/ReviewCreateComponent.vue';
 import ReviewCreateSuccessComponent from './components/ReviewCreateSuccessComponent';
+import SellerShowComponent from './components/SellerShowComponent';
 
 const routes = [
   {name: 'ReviewCreate', path: '/reviews/new', component: ReviewCreateComponent},
   {name: 'ReviewCreateSuccess', path: '/reviews/new/success', component: ReviewCreateSuccessComponent},
+  {name: 'SellerShowComponent', path: '/sellers/:id', component: SellerShowComponent},
 ];
 
 const router = new VueRouter({mode: 'history', routes: routes});

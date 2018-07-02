@@ -10,7 +10,7 @@ class ReviewController extends Controller
 
     public function store()
     {
-        $response = $this->origami->post('users', request()->all());
+        $response = $this->origami->post('reviews', request()->all());
         return response()->json($response);
     }
 }

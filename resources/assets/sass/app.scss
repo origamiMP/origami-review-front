@@ -1,34 +1,38 @@
-
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
+//@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons");
 // Variables
-@import "variables";
-
+//@import "variables";
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+//@import '~bootstrap/scss/bootstrap';
+@import "material-kit";
+@import "variables";
+@import "~font-awesome/scss/font-awesome";
 
-.starrating > input {display: none;}  /* Remove radio buttons */
-
-.starrating > label:before {
-  content: "\f005"; /* Star */
-  margin: 2px;
-  font-size: 3em;
-  font-family: FontAwesome;
-  display: inline-block;
+.starrating > input {
+  display: none;
 }
 
-.starrating > label
-{
+/* Remove radio buttons */
+
+.starrating > label > i {
   color: $primary-opacity; /* Start color when not clicked */
+  font-size: 4em;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.starrating > input:checked ~ label
-{ color: $primary ; } /* Set yellow color when star checked */
+.starrating > input:checked ~ label > i {
+  color: $primary;
+}
 
-.starrating > input:hover ~ label
-{ color: $primary ;  } /* Set yellow color when star hover */
+/* Set yellow color when star checked */
+
+.starrating > input:hover ~ label > i {
+  color: $primary;
+}
+
+/* Set yellow color when star hover */
 
 .btn.btn-secondary-opacity {
   background-color: $secondary-opacity;

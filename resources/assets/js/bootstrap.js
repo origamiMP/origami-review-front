@@ -12,4 +12,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+
+    require('./material-kit.min');
+    require('./bootstrap-material-design.min');
 } catch (e) {}

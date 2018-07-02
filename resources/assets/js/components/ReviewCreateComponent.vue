@@ -1,69 +1,68 @@
 <template>
     <div class="container">
-        <form v-on:submit.prevent="submitReview">
+        <div class="title"><h2>Add review for {{order.marketplace.name}}</h2></div>
 
-            <div class="col-md-12">
+        <div class="col-md-12">
 
-                <h2>Evaluez {{order.marketplace.name}}</h2>
-                <div class="mt-5 mb-5" v-for="criteria in order.marketplace.marketplace_criteria">
+            <div class="mt-5 mb-5" v-for="criteria in order.marketplace.marketplace_criteria">
 
-                    <div class="form-group row">
-                        <label class="col-sm-3" style="margin: auto"><h3>{{criteria.name}}</h3></label>
-                        <div class="col-sm-9">
-                            <div class="starrating risingstar d-flex float-left flex-row-reverse">
-                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_5'"
-                                       :name="criteria.id" value="5"/><label :for="criteria.id + '_5'"
-                                                                             title="Excellent"></label>
-                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_4'"
-                                       :name="criteria.id" value="4"/><label :for="criteria.id + '_4'"
-                                                                             title="Bon"></label>
-                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_3'"
-                                       :name="criteria.id" value="3"/><label :for="criteria.id + '_3'"
-                                                                             title="Moyen"></label>
-                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_2'"
-                                       :name="criteria.id" value="2"/><label :for="criteria.id + '_2'"
-                                                                             title="Bof"></label>
-                                <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_1'"
-                                       :name="criteria.id" value="1"/><label :for="criteria.id + '_1'"
-                                                                             title="Mauvais"></label>
-                            </div>
+                <div class="form-group row">
+                    <label class="col-sm-3" style="margin: auto"><h3>{{criteria.name}}</h3></label>
+                    <div class="col-sm-9">
+                        <div class="starrating risingstar d-flex float-left flex-row-reverse">
+                            <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_5'"
+                                   :name="criteria.id" value="5"/><label :for="criteria.id + '_5'"
+                                                                         title="Excellent">
+                            <i class="material-icons">star</i>
+                        </label>
+                            <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_4'"
+                                   :name="criteria.id" value="4"/><label :for="criteria.id + '_4'" title="Bon"><i
+                                class="material-icons">star</i></label>
+                            <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_3'"
+                                   :name="criteria.id" value="3"/><label :for="criteria.id + '_3'" title="Moyen"><i
+                                class="material-icons">star</i></label>
+                            <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_2'"
+                                   :name="criteria.id" value="2"/><label :for="criteria.id + '_2'" title="Bof"><i
+                                class="material-icons">star</i></label>
+                            <input v-model="review[criteria.id]" type="radio" :id="criteria.id + '_1'"
+                                   :name="criteria.id" value="1"/><label :for="criteria.id + '_1'"
+                                                                         title="Mauvais"><i
+                                class="material-icons">star</i></label>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="comment">Commentaire</label>
-                    <textarea v-model="review.text" class="form-control" id="comment"
-                              rows="8"></textarea>
-                </div>
-                <div class="form-group">
-                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-secondary-opacity">RAS</button>
-                    </div>
-                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="button" class="btn btn-secondary-opacity">TOP !</button>
-                    </div>
-                    <div class="btn-group mr-2" role="group" aria-label="Second group">
-                        <button type="button" class="btn btn-secondary-opacity">....</button>
-                    </div>
-                </div>
             </div>
 
-            <div class="row mt-5">
-
-                <div class="col-md-6 text-center" style="margin: auto;"><a href="#">Déposer un avis classique</a></div>
-
-                <div class="col-md-6 text-center">
-                    <button type="submit" class="btn btn-primary btn-lg">Déposer un avis vérifié <br>et
-                        gagner
-                        1,45
-                        ORI
-                    </button>
-                </div>
+            <div class="form-group">
+                <label for="comment"><h3>Your comment</h3></label>
+                <textarea v-model="review.text" class="form-control mt-5" id="comment" rows="8"></textarea>
             </div>
 
+            <!--<div class="form-group">-->
+                <!--<div class="btn-xs btn-group mr-2" role="group" aria-label="First group">-->
+                    <!--<button type="button" class="btn btn- btn-secondary-opacity">RAS</button>-->
+                <!--</div>-->
+                <!--<div class="btn-group mr-2" role="group" aria-label="Second group">-->
+                    <!--<button type="button" class="btn btn-secondary-opacity">TOP !</button>-->
+                <!--</div>-->
+                <!--<div class="btn-group mr-2" role="group" aria-label="Second group">-->
+                    <!--<button type="button" class="btn btn-secondary-opacity">....</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
 
-        </form>
+        <div class="row mt-5">
+
+            <div class="col-md-6 text-center" style="margin: auto;">
+                <a v-on:click="submitNonCertifiedReview" href="#">Send a classical review</a>
+            </div>
+
+            <div class="col-md-6 text-center">
+                <button v-on:click="submitCertifiedReview" class="btn btn-primary btn-lg">Send a certified review
+                    <br>and get 1,45 ORI
+                </button>
+            </div>
+        </div>
 
         <ModalInstallMetamask :showModal="installMetamaskModalShow" :closeAction="modalMetamaskClose"
                               :validateAction="modalMetamaskValidate"></ModalInstallMetamask>
@@ -95,7 +94,7 @@
       }
     },
     beforeCreate() {
-      this.axios.get('/orders/' + this.$route.query.order_id).then((response) => {
+      this.axios.get('/api/orders/' + this.$route.query.order_id).then((response) => {
         this.order = response.data;
       });
     },
@@ -104,18 +103,19 @@
       if (cookieReview !== null) {
         this.review = JSON.parse(cookieReview);
         this.$cookie.delete('review');
-        this.submitReview();
+        this.submitCertifiedReview();
       }
     },
     methods: {
-      submitReview() {
+      submitCertifiedReview() {
         let context = this;
         let router = this.$router;
 
         if (typeof web3 === 'undefined')
           this.installMetamaskModalShow = true;
-        else if (web3.eth.accounts.length === 0)
+        else if (web3.eth.accounts.length === 0) {
           this.enterMetamaskPasswordModalShow = true;
+        }
         else {
           let params = JSON.stringify({
             critere1: 'toto',
@@ -134,12 +134,26 @@
               context.review.signed_hash = result;
               context.review.wallet = web3.eth.accounts[0];
 
-              context.axios.post('/reviews', context.review).then((response) => {
+              context.axios.post('/api/reviews', context.review).then((response) => {
                 router.push({name: 'ReviewCreateSuccess'});
               });
             }
           });
         }
+      },
+      submitNonCertifiedReview() {
+        let context = this;
+        let router = this.$router;
+
+        let params = JSON.stringify({
+          critere1: 'toto',
+          text: 'tata',
+          rating: 5
+        });
+
+        context.axios.post('/api/reviews', context.review).then((response) => {
+          router.push({name: 'ReviewCreateSuccess'});
+        });
       },
       modalMetamaskValidate() {
         this.$cookie.set('review', JSON.stringify(this.review), {expires: '10m'});
