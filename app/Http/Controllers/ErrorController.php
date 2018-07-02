@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Session;
-
 class ErrorController extends Controller
 {
     /**
@@ -11,7 +9,6 @@ class ErrorController extends Controller
      */
     public function jsonGetSessionError()
     {
-        $fails = Session::get('fails');
         return view('errors._fails');
     }
 }

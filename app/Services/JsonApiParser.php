@@ -25,6 +25,7 @@ class JsonApiParser
     {
         $this->response = json_decode($jsonApiResponse);
         $this->arrayReturn = $this->response->data->attributes;
+        $this->arrayReturn->id = $this->response->data->id;
 
         if (isset($this->response->data->relationships))
             $this->arrayReturn = $this->constructRelationship($this->response->data->relationships);
