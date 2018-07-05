@@ -4,10 +4,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Laravel Vue CRUD Application</title>
+  <link href="{{asset('css/front.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
-  {{--<link href="{{asset('css/material-kit.min.css')}}" rel="stylesheet" type="text/css">--}}
 </head>
-<body>
 <header class="navbar navbar-expand navbar-dark bg-dark flex-column flex-md-row bd-navbar">
   <div class="container-fluid pl-5 pr-5">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +37,8 @@
     </div>
   </div>
 </header>
+
+<body>
 
 <div id="fails"></div>
 <div id="app">
@@ -81,5 +82,6 @@
     ]); ?>
 </script>
 <script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/front.js')}}"></script>
 </body>
 </html>

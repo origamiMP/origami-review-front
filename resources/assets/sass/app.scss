@@ -5,7 +5,7 @@
 //@import "variables";
 // Bootstrap
 //@import '~bootstrap/scss/bootstrap';
-@import "material-kit";
+//@import "material-kit";
 @import "variables";
 @import "~font-awesome/scss/font-awesome";
 
@@ -50,4 +50,8 @@
 
 .fade-enter, .fade-leave-active {
   opacity: 0
+}
+
+.section-tabs {
+  background: #EEEEEE;
 }

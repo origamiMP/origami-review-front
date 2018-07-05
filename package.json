@@ -23,7 +23,12 @@
         "vue-axios": "^2.1.1",
         "vue-loader": "^14.2.2",
         "vue-router": "^3.0.1",
-        "vue-template-compiler": "^2.5.16"
+        "vue-template-compiler": "^2.5.16",
+        "vue-material": "1.0.0-beta-8",
+        "vue-clickaway": "2.2.2",
+        "google-maps": "3.2.1",
+        "chartist": "0.11.0",
+        "es6-promise": "4.2.4"
     },
     "dependencies": {
         "vue-cookie": "^1.1.4"

@@ -14,13 +14,16 @@
 Route::prefix('api')->group(function () {
 
     Route::get('/orders/{id}', 'OrderController@show')->where('id', '[0-9]+');
-    Route::get('/api/sellers/{id}', 'SellerController@show')->where('id', '[0-9]+');
+    Route::get('/sellers/{id}', 'SellerController@show')->where('id', '[0-9]+');
     Route::post('/reviews', 'ReviewController@store');
     Route::get('/fails', 'ErrorController@jsonGetSessionError');
 
 });
 
-Route::get('/{vue_capture?}', function () {
-    return view('welcome');
+Route::get('/admin/{vue_capture?}', function () {
+    return view('admin/welcome');
 })->where('vue_capture', '[\/\w\.-]*');
 
+Route::get('/{vue_capture?}', function () {
+    return view('front/welcome');
+})->where('vue_capture', '[\/\w\.-]*');
