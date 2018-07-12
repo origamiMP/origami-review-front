@@ -9,6 +9,6 @@ class ErrorController extends Controller
      */
     public function jsonGetSessionError()
     {
-        return view('errors._fails');
+        return view('front.errors._fails');
     }
 }

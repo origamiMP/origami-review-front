@@ -4,8 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./material-kit.min');
-require('./bootstrap-material-design.min');
+require('./material-kit/material-kit');
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -14,8 +13,13 @@ import VueCookie from 'vue-cookie';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 
+// router setup
+import routes from './routes'
+
 Vue.use(VueRouter);
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, {
+  events: "input|blur"
+});
 Vue.use(VueCookie);
 Vue.use(VueAxios, axios);
 
@@ -29,15 +33,6 @@ axios.interceptors.response.use(function (response) {
 });
 
 import App from './App.vue';
-import ReviewCreateComponent from './components/ReviewCreateComponent.vue';
-import ReviewCreateSuccessComponent from './components/ReviewCreateSuccessComponent';
-import SellerShowComponent from './components/SellerShowComponent';
-
-const routes = [
-  {name: 'ReviewCreate', path: '/reviews/new', component: ReviewCreateComponent},
-  {name: 'ReviewCreateSuccess', path: '/reviews/new/success', component: ReviewCreateSuccessComponent},
-  {name: 'SellerShowComponent', path: '/sellers/:id', component: SellerShowComponent},
-];
 
 const router = new VueRouter({mode: 'history', routes: routes});
 window.vm = new Vue(Vue.util.extend({router}, App)).$mount('#app');

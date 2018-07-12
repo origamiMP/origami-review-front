@@ -5,5 +5,10 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    beforeCreate() {
+      this.$router.push('/register');
+      location.reload()
+    }
+  }
 </script>

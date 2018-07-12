@@ -15,6 +15,7 @@ Route::prefix('api')->group(function () {
 
     Route::get('/orders/{id}', 'OrderController@show')->where('id', '[0-9]+');
     Route::get('/sellers/{id}', 'SellerController@show')->where('id', '[0-9]+');
+    Route::post('/users', 'UserController@store');
     Route::post('/reviews', 'ReviewController@store');
     Route::get('/fails', 'ErrorController@jsonGetSessionError');
 

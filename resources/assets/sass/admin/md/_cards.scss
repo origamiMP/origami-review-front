@@ -230,6 +230,12 @@
         @include shadow-big-color($brand-success);
     }
 
+    [data-background-color="primary"],
+    .md-tabs.md-success .md-tabs-navigation{
+        background: linear-gradient(60deg, #e72b54, #e61b59);
+        @include shadow-big-color($brand-success);
+    }
+
     [data-background-color="orange"],
     .md-tabs.md-warning .md-tabs-navigation{
         background: linear-gradient(60deg, $orange-400, $orange-600);

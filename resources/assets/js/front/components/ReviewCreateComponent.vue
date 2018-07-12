@@ -139,7 +139,6 @@
               review.review_signed_hash = result;
               review.wallet = web3.eth.accounts[0];
 
-              console.log(review);
               context.axios.post('/api/reviews', review).then((response) => {
                 router.push({name: 'ReviewCreateSuccess'});
               });
