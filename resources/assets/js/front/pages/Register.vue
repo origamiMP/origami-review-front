@@ -93,25 +93,21 @@
     methods: {
       submitRegistration() {
         let context = this;
-        this.$validator.validateAll().then(function () {
+        this.$validator.validateAll().then(() => {
           if (!context.isChildrenValid())
             return false;
-          context.axios.post('/api/users', context.user).then((response) => {
+          context.axios.post('/api/users', context.user).then(() => {
             context.$router.push({name: 'LoginPage'});
           }).catch((error) => {
-            error.response.data.errors.forEach(function (err) {
-              context.errors.add({
-                field: err.title,
-                msg: err.detail
-              });
-              console.log(err);
+            error.response.data.errors.forEach((err) => {
+              context.errors.add({field: err.title, msg: err.detail});
             });
           })
         });
       },
       isChildrenValid() {
         let valid = true;
-        this.$children.forEach(function (children) {
+        this.$children.forEach((children) => {
           if (children.errors.items.length)
             valid = false;
         });

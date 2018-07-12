@@ -45,12 +45,27 @@
     },
     methods: {
       logIn() {
-        if (this.errors.length)
-          return false;
-
-        this.axios.post('/api/users', this.user).then((response) => {
-          router.push({name: ''});
+        let context = this;
+        this.$validator.validateAll().then(() => {
+          if (!context.isChildrenValid())
+            return false;
+          context.axios.post('/api/users/login', context.user).then(() => {
+            context.$router.push('/admin');
+            window.location.reload();
+          }).catch((error) => {
+            error.response.data.errors.forEach((err) => {
+              context.errors.add({field: err.title, msg: err.detail});
+            });
+          })
         });
+      },
+      isChildrenValid() {
+        let valid = true;
+        this.$children.forEach((children) => {
+          if (children.errors.items.length)
+            valid = false;
+        });
+        return valid;
       }
     }
   }

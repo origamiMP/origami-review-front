@@ -10,4 +10,11 @@ class UserController extends Controller
 
         return response()->json($user);
     }
+
+    public function login()
+    {
+        $this->origami->login(request()->get('email'), request()->get('password'));
+
+        return response()->json();
+    }
 }

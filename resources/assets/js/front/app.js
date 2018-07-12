@@ -26,9 +26,9 @@ Vue.use(VueAxios, axios);
 axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
-  axios.get('/api/fails').then(function (data) {
-    $("#fails").html(data.data);
-  });
+  console.log(error.response);
+  if (error.response.status === 401)
+    window.location.href = '/auth/login';
   return Promise.reject(error);
 });
 

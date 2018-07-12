@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Exceptions\OrigamiReviewApiException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Origami
@@ -185,11 +186,37 @@ class OrigamiReviewApi
         $statusCode = $response->getStatusCode();
         $response = $response->getBody()->getContents();
 
-        \Log::info(print_r($response, true));
-        if (in_array($statusCode, [400, 401, 404, 422, 500])) {
+        if (in_array($statusCode, [400, 401, 404, 422, 500]))
             throw new OrigamiReviewApiException(json_decode($response), $statusCode);
-        }
 
         return (new JsonApiParser())->parse($response);
+    }
+
+    public function login($email, $password)
+    {
+        $params = [
+            'http_errors' => false,
+            'headers' => [
+                'Accept' => 'application/json',
+                'content-type' => 'application/json'
+            ],
+            'json' => [
+                'grant_type' => 'password',
+                'client_id' => env('API_CLIENT_ID', 1),
+                'client_secret' => env('API_CLIENT_SECRET', 'secret'),
+                'username' => $email,
+                'password' => $password
+            ]
+        ];
+
+        $response = $this->client->post('v1/oauth/token', $params);
+
+        $statusCode = $response->getStatusCode();
+        $response = json_decode($response->getBody()->getContents());
+
+        if (in_array($statusCode, [400, 401, 404, 422, 500]))
+            throw new OrigamiReviewApiException($response, $statusCode);
+
+        Session::put('api_token', $response->access_token);
     }
 }
