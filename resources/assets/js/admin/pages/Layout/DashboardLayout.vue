@@ -2,7 +2,7 @@
   <div class="wrapper">
     <notifications></notifications>
 
-    <side-bar :backgroundImage="'/images/admin_cover.jpg'">
+    <side-bar :backgroundImage="'/images/city.jpg'">
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/admin/dashboard">
         <md-icon>dashboard</md-icon>

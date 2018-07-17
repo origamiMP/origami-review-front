@@ -132,7 +132,7 @@ form {
 // Whereas .form-group adds structure, bmd-form-group just needs to make sure we have enough padding for our labels to work.  That's the only purpose.
 .bmd-form-group {
   position: relative;
-  padding-top: 27px;
+  padding-top: 0;
 
   // -----
   // Labels

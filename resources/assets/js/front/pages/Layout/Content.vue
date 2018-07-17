@@ -1,8 +1,8 @@
 <template>
   <transition name="fade" mode="out-in">
-    <keep-alive>
+    <!--<keep-alive>-->
       <router-view></router-view>
-    </keep-alive>
+    <!--</keep-alive>-->
   </transition>
 </template>
 <script>
@@ -11,11 +11,11 @@ export default{}
 <style>
   .fade-enter-active, .fade-leave-active {
     transition-property: opacity;
-    transition-duration: .15s;
+    transition-duration: .10s;
   }
 
   .fade-enter-active {
-    transition-delay: .15s;
+    transition-delay: .10s;
   }
 
   .fade-enter, .fade-leave-active {

@@ -13,9 +13,11 @@
 
 Route::prefix('api')->group(function () {
 
-    Route::get('/orders/{id}', 'OrderController@show')->where('id', '[0-9]+');
-    Route::get('/sellers/{id}', 'SellerController@show')->where('id', '[0-9]+');
+    Route::get('/orders/{id}', 'OrderController@show');
+    Route::get('/sellers', 'SellerController@index');
+    Route::get('/sellers/{id}', 'SellerController@show');
     Route::post('/users', 'UserController@store');
+    Route::post('/me', 'UserController@current');
     Route::post('/users/login', 'UserController@login');
     Route::post('/reviews', 'ReviewController@store');
     Route::get('/fails', 'ErrorController@jsonGetSessionError');

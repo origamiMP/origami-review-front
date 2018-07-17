@@ -24,11 +24,22 @@ class JsonApiParser
     public function parse(string $jsonApiResponse)
     {
         $this->response = json_decode($jsonApiResponse);
-        $this->arrayReturn = $this->response->data->attributes;
-        $this->arrayReturn->id = $this->response->data->id;
+        if (is_array($this->response->data)) {
+            foreach($this->response->data as $data) {
+                $arrayTmp = $data->attributes;
+                $arrayTmp->id = $data->id;
+                if (isset($data->relationships))
+                    $arrayTmp = $this->constructRelationship($data->relationships, $arrayTmp);
 
-        if (isset($this->response->data->relationships))
-            $this->arrayReturn = $this->constructRelationship($this->response->data->relationships);
+                $this->arrayReturn[] = $arrayTmp;
+            }
+        }
+        else {
+            $this->arrayReturn = $this->response->data->attributes;
+            $this->arrayReturn->id = $this->response->data->id;
+            if (isset($this->response->data->relationships))
+                $this->arrayReturn = $this->constructRelationship($this->response->data->relationships);
+        }
 
         return $this->arrayReturn;
     }

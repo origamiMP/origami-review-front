@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+require('./material-kit/core/bootstrap-material-design.min');
 require('./material-kit/material-kit');
 
 import Vue from 'vue';
@@ -34,5 +35,11 @@ axios.interceptors.response.use(function (response) {
 
 import App from './App.vue';
 
-const router = new VueRouter({mode: 'history', routes: routes});
+const router = new VueRouter({
+  mode: 'history',
+  routes: routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
+});
 window.vm = new Vue(Vue.util.extend({router}, App)).$mount('#app');

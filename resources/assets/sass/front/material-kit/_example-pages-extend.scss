@@ -678,98 +678,109 @@
 
 .ecommerce-page{
     .container{
-        position: relative;
-        z-index: 2;
+        //position: relative;
+        //z-index: 2;
     }
 
     .card-header{
-        .container{
-            padding-top: 20vh;
-            color: #FFFFFF;
-            text-align: center;
+        height: 215px;
+        img {
+            object-fit: cover !important;
+            height: 100% !important;
+            width: 100% !important;
         }
+        //.container{
+        //    padding-top: 20vh;
+        //    color: #FFFFFF;
+        //    text-align: center;
+        //}
     }
 
-    .card-refine{
-        &.card-rose{
-            a{
-                &:hover,
-                &[aria-expanded="true"]{
-                    color: $brand-rose;
-                }
-            }
-        }
+    //.card-refine{
+    //    &.card-rose{
+    //        a{
+    //            &:hover,
+    //            &[aria-expanded="true"]{
+    //                color: $brand-rose;
+    //            }
+    //        }
+    //    }
+    //
+    //    .card-body{
+    //        padding-left: 15px;
+    //        padding-right: 15px;
+    //
+    //        &.card-refine{
+    //            padding-left: 15px;
+    //            padding-right: 15px;
+    //        }
+    //
+    //        .card-collapse{
+    //            .card-body{
+    //                max-height: 273px;
+    //                overflow-y: scroll;
+    //            }
+    //        }
+    //    }
+    //
+    //    .card-heading{
+    //        i{
+    //            float:none;
+    //        }
+    //    }
+    //
+    //    .price-right,
+    //    .price-left{
+    //        font-weight: 500;
+    //    }
+    //
+    //    .btn{
+    //        margin: -3px 0;
+    //    }
+    //
+    //    .card{
+    //        margin-bottom: 0;
+    //    }
+    //
+    //    .checkbox input[type=checkbox]:checked + .checkbox-material .check{
+    //        background: $brand-rose;
+    //    }
+    //}
+    //
+    //.card-form-horizontal{
+    //    form{
+    //        .form-group{
+    //            width: 100%;
+    //            .form-control{
+    //                width: 100%;
+    //            }
+    //        }
+    //    }
+    //}
+    //
+    //.card-product {
+    //  .price-container{
+    //    display: inline-flex;
+    //  }
+    //
+    //  .image{
+    //    overflow: hidden;
+    //    border-radius: $border-radius-large;
+    //  }
+    //
+    //  .card-footer {
+    //    .stats {
+    //      .btn {
+    //        i.material-icons {
+    //          top: -10px !important;
+    //        }
+    //      }
+    //    }
+    //  }
+    //}
 
-        .card-body{
-            padding-left: 15px;
-            padding-right: 15px;
-
-            &.card-refine{
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-
-            .card-collapse{
-                .card-body{
-                    max-height: 273px;
-                    overflow-y: scroll;
-                }
-            }
-        }
-
-        .card-heading{
-            i{
-                float:none;
-            }
-        }
-
-        .price-right,
-        .price-left{
-            font-weight: 500;
-        }
-
-        .btn{
-            margin: -3px 0;
-        }
-
-        .card{
-            margin-bottom: 0;
-        }
-
-        .checkbox input[type=checkbox]:checked + .checkbox-material .check{
-            background: $brand-rose;
-        }
-    }
-
-    .card-form-horizontal{
-        form{
-            .form-group{
-                width: 100%;
-                .form-control{
-                    width: 100%;
-                }
-            }
-        }
-    }
-
-    .card-product {
-      .price-container{
-        display: inline-flex;
-      }
-
-      .image{
-        overflow: hidden;
-        border-radius: $border-radius-large;
-      }
-
-      .card-footer {
-        .stats {
-          .btn {
-            i.material-icons {
-              top: -10px !important;
-            }
-          }
-        }
-      }
+    .page-header {
+        //z-index: -1;
+        margin-top: -40px;
     }
 }

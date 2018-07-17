@@ -20,7 +20,8 @@ import Chartist from 'chartist'
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes
-  linkExactActiveClass: 'nav-item active'
+  linkExactActiveClass: 'nav-item active',
+  mode: "history"
 })
 
 Vue.use(VueRouter)
