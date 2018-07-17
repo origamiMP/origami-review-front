@@ -34,7 +34,7 @@
                                         <div class="row">
                                             <div class="col-md-3"></div>
                                             <div class="col-md-6 text-center">
-                                                <h3>Avis (42) • Bon</h3>
+                                                <h3>Avis ({{countTrustedReviews}}) • Bon</h3>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -340,7 +340,9 @@
   export default {
     data() {
       return {
-        seller: {},
+        seller: {
+          reviews: []
+        },
       }
     },
     created() {
@@ -350,6 +352,11 @@
         this.seller = response.data;
       });
     },
-    methods: {}
+    methods: {},
+    computed: {
+      countTrustedReviews() {
+        return this.seller.reviews.length;
+      }
+    }
   }
 </script>

@@ -25,7 +25,7 @@ class JsonApiParser
     {
         $this->response = json_decode($jsonApiResponse);
         if (is_array($this->response->data)) {
-            foreach($this->response->data as $data) {
+            foreach ($this->response->data as $data) {
                 $arrayTmp = $data->attributes;
                 $arrayTmp->id = $data->id;
                 if (isset($data->relationships))
@@ -33,8 +33,7 @@ class JsonApiParser
 
                 $this->arrayReturn[] = $arrayTmp;
             }
-        }
-        else {
+        } else {
             $this->arrayReturn = $this->response->data->attributes;
             $this->arrayReturn->id = $this->response->data->id;
             if (isset($this->response->data->relationships))

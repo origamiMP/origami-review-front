@@ -42,18 +42,36 @@
                                 </div>
                                 <div class="card-body ">
                                     <h4 class="card-title">{{ seller.name }}</h4>
-                                    <h6 class="card-category text-gray">Vendeur</h6>
+                                    <!--<h6 class="card-category text-gray">Vendeur</h6>-->
                                 </div>
                                 <div class="card-footer justify-content-center">
-                                    <a href="#pablo" class="btn btn-just-icon btn-twitter btn-round">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-facebook btn-round">
-                                        <i class="fa fa-facebook-square"></i>
-                                    </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-google btn-round">
-                                        <i class="fa fa-google"></i>
-                                    </a>
+                                    <div class="starrating d-flex float-left flex-row-reverse">
+                                        <input v-model="seller.average_verified_rating" type="radio"
+                                               :id="seller.name + 'star1'" value="5"
+                                               :name="seller.name + 'star1'" disabled/>
+                                        <label :for="seller.name + 'star1'" style="font-size: 10px !important;"><i
+                                                class="material-icons">star</i></label>
+                                        <input v-model="seller.average_verified_rating" type="radio"
+                                               :id="seller.name + 'star2'" value="4"
+                                               :name="seller.name + 'star2'" disabled/>
+                                        <label :for="seller.name + 'star2'" style="font-size: 10px !important;"><i
+                                                class="material-icons">star</i></label>
+                                        <input v-model="seller.average_verified_rating" type="radio"
+                                               :id="seller.name + 'star3'" value="3"
+                                               :name="seller.name + 'star3'" disabled/>
+                                        <label :for="seller.name + 'star3'" style="font-size: 10px !important;"><i
+                                                class="material-icons">star</i></label>
+                                        <input v-model="seller.average_verified_rating" type="radio"
+                                               :id="seller.name + 'star4'" value="2"
+                                               :name="seller.name + 'star4'" disabled/>
+                                        <label :for="seller.name + 'star4'" style="font-size: 10px !important;"><i
+                                                class="material-icons">star</i></label>
+                                        <input v-model="seller.average_verified_rating" type="radio"
+                                               :id="seller.name + 'star5'" value="1"
+                                               :name="seller.name + 'star5'" disabled/>
+                                        <label :for="seller.name + 'star5'" style="font-size: 10px !important;"><i
+                                                class="material-icons">star</i></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
