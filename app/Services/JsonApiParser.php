@@ -49,7 +49,9 @@ class JsonApiParser
             $context = $this->arrayReturn;
 
         foreach ($relationships as $key => $relationship) {
-            if (is_array($relationship->data) > 0) {
+            if (!isset($this->response->included))
+                $context->$key = [];
+            elseif (is_array($relationship->data) > 0) {
                 $idxs = array_keys(array_column($this->response->included, 'type'), $key);
                 $array = [];
                 foreach ($idxs as $cpt => $idx) {

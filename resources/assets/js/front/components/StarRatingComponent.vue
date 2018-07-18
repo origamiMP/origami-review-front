@@ -1,0 +1,47 @@
+<template>
+    <div class="starrating d-flex float-left flex-row-reverse">
+        <input v-model="value" type="radio"
+               :id="inputName + 'star1'" value="5"
+               :name="inputName"/>
+        <label :for="inputName + 'star1'"><i v-bind:style="fontSizeStyle" class="material-icons">star</i></label>
+        <input v-model="value" type="radio"
+               :id="inputName + 'star2'" value="4"
+               :name="inputName"/>
+        <label :for="inputName + 'star2'"><i v-bind:style="fontSizeStyle" class="material-icons">star</i></label>
+        <input v-model="value" type="radio"
+               :id="inputName + 'star3'" value="3"
+               :name="inputName"/>
+        <label :for="inputName + 'star3'"><i v-bind:style="fontSizeStyle" class="material-icons">star</i></label>
+        <input v-model="value" type="radio"
+               :id="inputName + 'star4'" value="2"
+               :name="inputName"/>
+        <label :for="inputName + 'star4'"><i v-bind:style="fontSizeStyle" class="material-icons">star</i></label>
+        <input v-model="value" type="radio"
+               :id="inputName + 'star5'" value="1"
+               :name="inputName"/>
+        <label :for="inputName + 'star5'"><i v-bind:style="fontSizeStyle" class="material-icons">star</i></label>
+    </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      inputName: String,
+      value: Number,
+      fontSize: {
+        type: String,
+        default: '30px'
+      },
+    },
+    data() {
+      return {
+        fontSizeStyle: {
+          fontSize: this.fontSize
+        }
+      }
+    }
+  }
+</script>
+
+<style scoped>
+</style>

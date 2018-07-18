@@ -34,34 +34,17 @@
                                         <div class="row">
                                             <div class="col-md-3"></div>
                                             <div class="col-md-6 text-center">
-                                                <h3>Avis ({{countTrustedReviews}}) • Bon</h3>
+                                                <h3>Avis ({{countTrustedReviews}}) •
+                                                    {{trustedReviewScoreQualifier}}</h3>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3"></div>
                                             <div class="col-md-6">
-                                                <div class="starrating d-flex float-left flex-row-reverse">
-                                                    <input v-model="seller.average_verified_rating" type="radio"
-                                                           id="star1" value="5"
-                                                           name="star" disabled/>
-                                                    <label for="star1"><i class="material-icons">star</i></label>
-                                                    <input v-model="seller.average_verified_rating" type="radio"
-                                                           id="star2" value="4"
-                                                           name="star" disabled/>
-                                                    <label for="star1"><i class="material-icons">star</i></label>
-                                                    <input v-model="seller.average_verified_rating" type="radio"
-                                                           id="star3" value="3"
-                                                           name="star" disabled/>
-                                                    <label for="star1"><i class="material-icons">star</i></label>
-                                                    <input v-model="seller.average_verified_rating" type="radio"
-                                                           id="star4" value="2"
-                                                           name="star" disabled/>
-                                                    <label for="star1"><i class="material-icons">star</i></label>
-                                                    <input v-model="seller.average_verified_rating" type="radio"
-                                                           id="star5" value="1"
-                                                           name="star" disabled/>
-                                                    <label for="star1"><i class="material-icons">star</i></label>
-                                                </div>
+                                                <star-rating-component
+                                                        v-model="seller.average_verified_rating"
+                                                        :input-name="seller.name + 'Rating'"
+                                                        font-size="60px"/>
                                             </div>
                                         </div>
                                     </div>
@@ -73,56 +56,56 @@
                                             <div class="col-md-8 pl-0">
                                                 <div class="mt-2 progress progress-line-primary">
                                                     <div class="progress-bar progress-bar-primary" role="progressbar"
-                                                         style="width: 75%">
+                                                         v-bind:style="{width: fiveRatingRatio}">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1 pl-0">75%</div>
+                                            <div class="col-md-1 pl-0">{{fiveRatingRatio}}</div>
                                             <div class="col-md-3 pr-0">Bon</div>
                                             <div class="col-md-8 pl-0">
                                                 <div class="mt-2 progress progress-line-primary">
                                                     <div class="progress-bar progress-bar-primary" role="progressbar"
-                                                         style="width: 20%">
+                                                         v-bind:style="{width: fourRatingRatio}">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1 pl-0">20%</div>
+                                            <div class="col-md-1 pl-0">{{fourRatingRatio}}</div>
                                             <div class="col-md-3 pr-0">Moyen</div>
                                             <div class="col-md-8 pl-0">
                                                 <div class="mt-2 progress progress-line-primary">
                                                     <div class="progress-bar progress-bar-primary" role="progressbar"
-                                                         style="width: 3%">
+                                                         v-bind:style="{width: threeRatingRatio}">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1 pl-0">3%</div>
-                                            <div class="col-md-3 pr-0">Bas</div>
-                                            <div class="col-md-8 pl-0">
-                                                <div class="mt-2 progress progress-line-primary">
-                                                    <div class="progress-bar progress-bar-primary" role="progressbar"
-                                                         style="width: 1%">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1 pl-0">1%</div>
+                                            <div class="col-md-1 pl-0">{{threeRatingRatio}}</div>
                                             <div class="col-md-3 pr-0">Mauvais</div>
                                             <div class="col-md-8 pl-0">
                                                 <div class="mt-2 progress progress-line-primary">
                                                     <div class="progress-bar progress-bar-primary" role="progressbar"
-                                                         style="width: 1%">
+                                                         v-bind:style="{width: twoRatingRatio}">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1 pl-0">1%</div>
+                                            <div class="col-md-1 pl-0">{{twoRatingRatio}}</div>
+                                            <div class="col-md-3 pr-0">Mediocre</div>
+                                            <div class="col-md-8 pl-0">
+                                                <div class="mt-2 progress progress-line-primary">
+                                                    <div class="progress-bar progress-bar-primary" role="progressbar"
+                                                         v-bind:style="{width: oneRatingRatio}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 pl-0">{{oneRatingRatio}}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="pill2">
-                                Efficiently unleash cross-media information without cross-media value. Quickly maximize
-                                timely deliverables for real-time schemas.
-                                <br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
-                            </div>
+                            <!--<div class="tab-pane" id="pill2">-->
+                                <!--Efficiently unleash cross-media information without cross-media value. Quickly maximize-->
+                                <!--timely deliverables for real-time schemas.-->
+                                <!--<br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.-->
+                            <!--</div>-->
                         </div>
                     </div>
                 </div>
@@ -131,193 +114,62 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
-                            <div class="card" style="margin-bottom: 20px">
+                            <div v-for="review in seller.reviews" class="card" style="margin-bottom: 20px">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6" style="margin: auto;">
-                                            <div class="starrating d-flex float-left flex-row-reverse">
-                                            <input v-model="seller.average_verified_rating" type="radio"
-                                                   id="astar1" value="5"
-                                                   name="toto" disabled/>
-                                            <label for="astar1" style="font-size: 10px !important;"><i
-                                                    class="material-icons">star</i></label>
-                                            <input v-model="seller.average_verified_rating" type="radio"
-                                                   id="astar2" value="4"
-                                                   name="toto" disabled/>
-                                            <label for="astar2" style="font-size: 10px !important;"><i
-                                                    class="material-icons">star</i></label>
-                                            <input v-model="seller.average_verified_rating" type="radio"
-                                                   id="astar3" value="3"
-                                                   name="toto" disabled/>
-                                            <label for="astar3" style="font-size: 10px !important;"><i
-                                                    class="material-icons">star</i></label>
-                                            <input v-model="seller.average_verified_rating" type="radio"
-                                                   id="astar4" value="2"
-                                                   name="toto" disabled/>
-                                            <label for="astar4" style="font-size: 10px !important;"><i
-                                                    class="material-icons">star</i></label>
-                                            <input v-model="seller.average_verified_rating" type="radio"
-                                                   id="astar5" value="1"
-                                                   name="toto" disabled/>
-                                            <label for="astar5" style="font-size: 10px !important;"><i
-                                                    class="material-icons">star</i></label>
+                                        <div class="col-md-3" style="margin: auto;">
+                                            <star-rating-component v-model="review.rating" :input-name="review.id"/>
                                         </div>
-                                        </div>
-                                        <div class="col-md-6" style="margin: auto;">
-                                            <span class="float-right">publiée le 7 novembre
-                                                2019
-                                            </span>
+                                        <div class="col-md-9" style="margin: auto;">
+                                            <span class="text-gray float-right">publiée le {{review.created_at.date}}</span>
 
                                         </div>
                                     </div>
                                     <hr/>
-                                    <div>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card" style="margin-bottom: 20px">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6" style="margin: auto;">
-                                            <div class="starrating d-flex float-left flex-row-reverse">
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="bstar1" value="5"
-                                                       name="tata" disabled/>
-                                                <label for="bstar1" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="bstar2" value="4"
-                                                       name="tata" disabled/>
-                                                <label for="bstar2" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="bstar3" value="3"
-                                                       name="tata" disabled/>
-                                                <label for="bstar3" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="bstar4" value="2"
-                                                       name="tata" disabled/>
-                                                <label for="bstar4" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="bstar5" value="1"
-                                                       name="tata" disabled/>
-                                                <label for="bstar5" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" style="margin: auto;">
-                                            <span class="float-right">publiée le 7 novembre
-                                                2019
-                                            </span>
-
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card" style="margin-bottom: 20px">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6" style="margin: auto;">
-                                            <div class="starrating d-flex float-left flex-row-reverse">
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="cstar1" value="5"
-                                                       name="titi" disabled/>
-                                                <label for="cstar1" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="cstar2" value="4"
-                                                       name="titi" disabled/>
-                                                <label for="cstar2" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="cstar3" value="3"
-                                                       name="titi" disabled/>
-                                                <label for="cstar3" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="cstar4" value="2"
-                                                       name="titi" disabled/>
-                                                <label for="cstar4" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                                <input v-model="seller.average_verified_rating" type="radio"
-                                                       id="cstar5" value="1"
-                                                       name="titi" disabled/>
-                                                <label for="cstar5" style="font-size: 10px !important;"><i
-                                                        class="material-icons">star</i></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" style="margin: auto;">
-                                            <span class="float-right">publiée le 7 novembre
-                                                2019
-                                            </span>
-
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    <div>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse
-                                    </div>
+                                    <div>{{review.text}}</div>
+                                    <div class="text-gray float-right">{{review.ddb_supplier}}_node_id: {{review.ddb_node_id}}</div>
                                 </div>
                             </div>
 
-                            <nav aria-label="..." class="mt-5">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled">
-                                        <span class="page-link">Previous</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active">
-                                      <span class="page-link">
-                                        2
-                                        <span class="sr-only">(current)</span>
-                                      </span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <!--<nav aria-label="..." class="mt-5">-->
+                                <!--<ul class="pagination justify-content-center">-->
+                                    <!--<li class="page-item disabled">-->
+                                        <!--<span class="page-link">Previous</span>-->
+                                    <!--</li>-->
+                                    <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+                                    <!--<li class="page-item active">-->
+                                      <!--<span class="page-link">-->
+                                        <!--2-->
+                                        <!--<span class="sr-only">(current)</span>-->
+                                      <!--</span>-->
+                                    <!--</li>-->
+                                    <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                                    <!--<li class="page-item">-->
+                                        <!--<a class="page-link" href="#">Next</a>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</nav>-->
                         </div>
                         <div class="col-md-4">
-                            <div class="card" style="margin-bottom: 20px">
+                            <div v-if="seller.description || seller.website_link" class="card"
+                                 style="margin-bottom: 20px">
                                 <div class="card-body">
-                                    <h4><b>Comment Se Ruiner</b></h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                        irure dolor in reprehenderit in voluptate velit esse</p>
+                                    <h4><b>{{seller.name}}</b></h4>
+                                    <p>{{seller.description}}</p>
                                     <div class="text-center">
-                                        <button class="btn btn-round btn-primary">Visiter Comment Se Ruiner</button>
+                                        <button :href="seller.website_link" class="btn btn-round btn-primary">Visiter
+                                            {{seller.name}}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card" style="margin-bottom: 20px">
+                            <div v-if="seller.email || seller.phone || seller.address" class="card"
+                                 style="margin-bottom: 20px">
                                 <div class="card-body">
                                     <h4><b>Informations de contact :</b></h4>
-                                    <div>Ecrire à : <a href="#">contact@commentseruiner.com</a></div>
-                                    <div>Appeler le : 0642424242</div>
-                                    <div>Nous trouver : 165 avenue de Bretagne 59000 Lille</div>
+                                    <div>Ecrire à : <a :href="seller.email">{{seller.email}}</a></div>
+                                    <div>Appeler le : {{seller.phone}}</div>
+                                    <div>Nous trouver : {{seller.address}}</div>
                                     <div class="text-center">
                                         <button class="mr-3 btn btn-default btn-fab btn-fab-mini btn-round"><i
                                                 class="fa fa-facebook"></i></button>
@@ -333,11 +185,15 @@
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
+  import StarRatingComponent from './StarRatingComponent'
+
   export default {
+    components: {StarRatingComponent},
     data() {
       return {
         seller: {
@@ -354,8 +210,39 @@
     },
     methods: {},
     computed: {
+      fiveRatingRatio() {
+        return parseFloat(this.seller.five_rating_reviews_ratio) * 100 + '%'
+      },
+      fourRatingRatio() {
+        return parseFloat(this.seller.four_rating_reviews_ratio) * 100 + '%'
+      },
+      threeRatingRatio() {
+        return parseFloat(this.seller.three_rating_reviews_ratio) * 100 + '%'
+      },
+      twoRatingRatio() {
+        return parseFloat(this.seller.two_rating_reviews_ratio) * 100 + '%'
+      },
+      oneRatingRatio() {
+        return parseFloat(this.seller.one_rating_reviews_ratio) * 100 + '%'
+      },
       countTrustedReviews() {
         return this.seller.reviews.length;
+      },
+      trustedReviewScoreQualifier() {
+        switch (this.seller.average_verified_rating) {
+          case 1:
+            return 'Mediocre';
+          case 2:
+            return 'Mauvais';
+          case 3:
+            return "Moyen";
+          case 4:
+            return "Bon";
+          case 5:
+            return "Excellent";
+          default:
+            return "Sans Avis";
+        }
       }
     }
   }
