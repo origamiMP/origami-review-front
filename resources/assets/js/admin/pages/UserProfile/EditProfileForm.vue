@@ -1,81 +1,55 @@
 <template>
-  <form>
-    <md-card>
-      <md-card-header :data-background-color="dataBackgroundColor">
-        <h4 class="title">Edit Profile</h4>
-        <p class="category">Complete your profile</p>
-      </md-card-header>
+    <!--<md-card>-->
+      <!--<md-card-header :data-background-color="dataBackgroundColor">-->
+        <!--<h4 class="title">Edit Profile</h4>-->
+        <!--&lt;!&ndash;<p class="category">Complete your profile</p>&ndash;&gt;-->
+      <!--</md-card-header>-->
 
-      <md-card-content>
-        <div class="md-layout">
+      <!--<md-card-content>-->
+        <div class="md-layout pt-5">
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>Company (disabled)</label>
-              <md-input v-model="disabled" disabled></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>User Name</label>
-              <md-input v-model="username" type="text"></md-input>
+              <label>Company Name</label>
+              <md-input v-on:change="updateProfile" v-model="organization.name"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>Email Address</label>
-              <md-input v-model="emailadress" type="email"></md-input>
+              <md-input v-on:change="updateProfile" v-model="organization.email" type="email"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
+          <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>First Name</label>
-              <md-input v-model="firstname" type="text"></md-input>
+              <label>Website Link</label>
+              <md-input v-on:change="updateProfile" v-model="organization.website_link" type="text"></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>Last Name</label>
-              <md-input v-model="lastname" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-100">
+          <div class="md-layout-item md-small-size-100 md-size-66">
             <md-field>
               <label>Adress</label>
-              <md-input v-model="address" type="text"></md-input>
+              <md-input v-on:change="updateProfile" v-model="organization.address" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>City</label>
-              <md-input v-model="city" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Country</label>
-              <md-input v-model="country" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Postal Code</label>
-              <md-input v-model="code" type="number"></md-input>
+              <label>Phone</label>
+              <md-input v-on:change="updateProfile" v-model="organization.phone" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100">
             <md-field maxlength="5">
-              <label>About Me</label>
-              <md-textarea v-model="aboutme"></md-textarea>
+              <label>Description</label>
+              <md-textarea v-on:change="updateProfile" v-model="organization.description"></md-textarea>
             </md-field>
           </div>
-          <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success">Update Profile</md-button>
-          </div>
+          <!--<div class="md-layout-item md-size-100 text-right">-->
+            <!--<md-button v-on:click="updateProfile" class="md-raised md-success">Update Profile</md-button>-->
+          <!--</div>-->
         </div>
 
-      </md-card-content>
-    </md-card>
-  </form>
+      <!--</md-card-content>-->
+    <!--</md-card>-->
 </template>
 <script>
 export default {
@@ -88,16 +62,20 @@ export default {
   },
   data () {
     return {
-      username: null,
-      disabled: null,
-      emailadress: null,
-      lastname: null,
-      firstname: null,
-      address: null,
-      city: null,
-      country: null,
-      code: null,
-      aboutme: "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
+      organization: {},
+    }
+  },
+  created() {
+    this.axios.get('/api/me').then((response) => {
+      this.organization = response.data.organization;
+    })
+  },
+  methods: {
+    updateProfile() {
+      let context = this;
+      this.axios.put('/api/sellers/' + this.organization.id, this.organization).then((response) => {
+        context.$root.currentUser.organization = this.organization;
+      })
     }
   }
 }

@@ -2,13 +2,12 @@
     <div class="sidebar" :data-color="activeColor" :data-image="backgroundImage" :style="sidebarStyle">
         <div class="logo">
             <a href="#" class="simple-text logo-mini">
-                <div class="logo-img"><img :src="imgLogo" alt="">
-                </div>
+                <div class="logo-img"><img :src="this.$root.currentUser.organization.image_profile" alt=""></div>
             </a>
 
             <a href="https://www.creative-tim.com/product/vue-material-dashboard" target="_blank"
                class="simple-text logo-normal">
-                {{title}}
+                {{this.$root.currentUser.organization.name}}
             </a>
         </div>
         <div class="sidebar-wrapper">
@@ -36,10 +35,6 @@
       MobileMenu
     },
     props: {
-      title: {
-        type: String,
-        default: 'Vue MD'
-      },
       backgroundImage: {
         type: String,
       },

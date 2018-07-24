@@ -188,8 +188,12 @@ class OrigamiReviewApi
 
         \Log::info(print_r($response, true));
 
-        if (in_array($statusCode, [400, 401, 404, 422, 500]))
+        if (in_array($statusCode, [400, 404, 422, 500]))
             throw new OrigamiReviewApiException(json_decode($response), $statusCode);
+        elseif ($statusCode == 401)
+            throw new OrigamiReviewApiException([$response], $statusCode);
+        elseif ($statusCode == 204)
+            return [];
 
         return (new JsonApiParser())->parse($response);
     }

@@ -1,13 +1,8 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div class="md-layout-item md-medium-size-100 md-size-66">
-        <edit-profile-form data-background-color="primary">
-
-        </edit-profile-form>
-      </div>
-      <div class="md-layout-item md-medium-size-100 md-size-33">
-        <user-card>
+      <div class="md-layout-item md-medium-size-100 md-size-100">
+        <user-card :cardUserImage="this.$root.currentUser.organization.image_profile">
 
         </user-card>
       </div>
@@ -22,6 +17,14 @@ import {
 } from '../pages'
 
 export default{
+  data() {
+    return {
+      currentUser: {}
+    }
+  },
+  created() {
+    this.sidebarStore = {}
+  },
   components: {
     EditProfileForm,
     UserCard

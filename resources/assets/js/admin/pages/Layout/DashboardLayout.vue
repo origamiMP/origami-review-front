@@ -2,7 +2,7 @@
   <div class="wrapper">
     <notifications></notifications>
 
-    <side-bar :backgroundImage="'/images/city.jpg'">
+    <side-bar :backgroundImage="'/images/city.jpg'" :title="currentUser.name">
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/admin/dashboard">
         <md-icon>dashboard</md-icon>
@@ -10,27 +10,15 @@
       </sidebar-link>
       <sidebar-link to="/admin/user">
         <md-icon>person</md-icon>
-        <p>User Profile</p>
+        <p>Profile</p>
       </sidebar-link>
       <sidebar-link to="/admin/table">
-        <md-icon>content_paste</md-icon>
-        <p>Table list</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/typography">
-        <md-icon>library_books</md-icon>
-        <p>Typography</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/icons">
-        <md-icon>bubble_chart</md-icon>
-        <p>Icons</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/maps">
-        <md-icon>location_on</md-icon>
-        <p>Maps</p>
+        <md-icon>star</md-icon>
+        <p>Reviews</p>
       </sidebar-link>
       <sidebar-link to="/admin/notifications">
-        <md-icon>notifications</md-icon>
-        <p>Notifications</p>
+        <md-icon>settings</md-icon>
+        <p>Settings</p>
       </sidebar-link>
     </side-bar>
 
@@ -60,6 +48,16 @@ export default {
     DashboardContent,
     ContentFooter,
     MobileMenu
+  },
+  data() {
+    return {
+      currentUser: {}
+    }
+  },
+  beforeCreate() {
+    this.axios.get('/api/me').then((response) => {
+      this.$root.currentUser = response.data;
+    })
   }
 }
 </script>

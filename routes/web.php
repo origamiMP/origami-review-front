@@ -14,12 +14,18 @@
 Route::prefix('api')->group(function () {
 
     Route::get('/orders/{id}', 'OrderController@show');
+
     Route::get('/sellers', 'SellerController@index');
     Route::get('/sellers/{id}', 'SellerController@show');
+    Route::put('/sellers/{id}', 'SellerController@update');
+
     Route::post('/users', 'UserController@store');
-    Route::post('/me', 'UserController@current');
+    Route::get('/me', 'UserController@current');
     Route::post('/users/login', 'UserController@login');
+
     Route::post('/reviews', 'ReviewController@store');
+    Route::get('/reviews', 'ReviewController@index');
+
     Route::get('/fails', 'ErrorController@jsonGetSessionError');
 
 });

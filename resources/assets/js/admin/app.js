@@ -3,6 +3,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
+import VeeValidate from 'vee-validate';
+import VueCookie from 'vue-cookie';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
+
 
 // router setup
 import routes from './routes/routes'
@@ -29,13 +34,28 @@ Vue.use(MaterialDashboard)
 Vue.use(GlobalComponents)
 Vue.use(GlobalDirectives)
 Vue.use(Notifications)
+Vue.use(VeeValidate, {
+  events: "input|blur"
+});
+Vue.use(VueCookie);
+Vue.use(VueAxios, axios);
+
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  console.log(error.response);
+  if (error.response.status === 401)
+    window.location.href = '/auth/login';
+  return Promise.reject(error);
+});
+
 
 // global library setup
 Object.defineProperty(Vue.prototype, '$Chartist', {
   get () {
     return this.$root.Chartist
   }
-})
+});
 
 /* eslint-disable no-new */
 new Vue({
@@ -43,6 +63,7 @@ new Vue({
   render: h => h(App),
   router,
   data: {
-    Chartist: Chartist
+    Chartist: Chartist,
+    currentUser: {organization: {}}
   }
 })

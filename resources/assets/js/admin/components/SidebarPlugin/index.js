@@ -6,7 +6,7 @@ const SidebarStore = {
   displaySidebar (value) {
     this.showSidebar = value
   }
-}
+};
 
 const SidebarPlugin = {
 
@@ -14,19 +14,20 @@ const SidebarPlugin = {
     Vue.mixin({
       data () {
         return {
+          currentUser: { organization: {}},
           sidebarStore: SidebarStore
         }
       }
-    })
+    });
 
     Object.defineProperty(Vue.prototype, '$sidebar', {
       get () {
         return this.$root.sidebarStore
       }
-    })
-    Vue.component('side-bar', Sidebar)
+    });
+    Vue.component('side-bar', Sidebar);
     Vue.component('sidebar-link', SidebarLink)
   }
-}
+};
 
 export default SidebarPlugin
