@@ -6,20 +6,20 @@
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/admin/dashboard">
         <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
+        <p>Tableau de bord</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/reviews">
+        <md-icon>star</md-icon>
+        <p>Avis</p>
       </sidebar-link>
       <sidebar-link to="/admin/user">
         <md-icon>person</md-icon>
-        <p>Profile</p>
+        <p>Profil</p>
       </sidebar-link>
-      <sidebar-link to="/admin/table">
-        <md-icon>star</md-icon>
-        <p>Reviews</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/notifications">
-        <md-icon>settings</md-icon>
-        <p>Settings</p>
-      </sidebar-link>
+      <!--<sidebar-link to="/admin/notifications">-->
+        <!--<md-icon>settings</md-icon>-->
+        <!--<p>Paramètres</p>-->
+      <!--</sidebar-link>-->
     </side-bar>
 
     <div class="main-panel">

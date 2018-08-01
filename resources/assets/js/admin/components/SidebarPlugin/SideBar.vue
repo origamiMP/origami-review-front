@@ -5,7 +5,7 @@
                 <div class="logo-img"><img :src="this.$root.currentUser.organization.image_profile" alt=""></div>
             </a>
 
-            <a href="https://www.creative-tim.com/product/vue-material-dashboard" target="_blank"
+            <a :href="'http://'+this.$root.currentUser.organization.website_link" target="_blank"
                class="simple-text logo-normal">
                 {{this.$root.currentUser.organization.name}}
             </a>

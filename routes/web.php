@@ -25,6 +25,7 @@ Route::prefix('api')->group(function () {
 
     Route::post('/reviews', 'ReviewController@store');
     Route::get('/reviews', 'ReviewController@index');
+    Route::get('/reviews/{id}', 'ReviewController@show');
 
     Route::get('/fails', 'ErrorController@jsonGetSessionError');
 

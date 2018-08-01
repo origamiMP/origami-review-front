@@ -2,7 +2,8 @@ import DashboardLayout from '../pages/Layout/DashboardLayout.vue'
 
 import Dashboard from '../pages/Dashboard.vue'
 import UserProfile from '../pages/UserProfile.vue'
-import TableList from '../pages/TableList.vue'
+import ReviewList from '../pages/ReviewList.vue'
+import ReviewShow from '../pages/ReviewShow.vue'
 import Typography from '../pages/Typography.vue'
 import Icons from '../pages/Icons.vue'
 import Maps from '../pages/Maps.vue'
@@ -25,9 +26,14 @@ const routes = [
         component: UserProfile
       },
       {
-        path: '/admin/table',
-        name: 'Table List',
-        component: TableList
+        path: '/admin/reviews',
+        name: 'Reviews',
+        component: ReviewList
+      },
+      {
+        path: '/admin/reviews/:id',
+        name: 'Review',
+        component: ReviewShow
       },
       {
         path: '/admin/typography',

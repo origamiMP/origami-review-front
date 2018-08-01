@@ -11,7 +11,7 @@ form {
 
     .bmd-form-group {
       display: inline-block;
-      padding-top: 0;
+      //padding-top: 27px;
     }
 
     .btn {
@@ -131,8 +131,8 @@ form {
 
 // Whereas .form-group adds structure, bmd-form-group just needs to make sure we have enough padding for our labels to work.  That's the only purpose.
 .bmd-form-group {
-  position: relative;
-  padding-top: 0;
+  //position: relative;
+  //padding-top: 27px;
 
   // -----
   // Labels
@@ -150,7 +150,7 @@ form {
     }
   [class^='bmd-label'],
   [class*=' bmd-label'] {
-    position: absolute;
+    //position: absolute;
     pointer-events: none;
     transition: 0.3s ease all;
 

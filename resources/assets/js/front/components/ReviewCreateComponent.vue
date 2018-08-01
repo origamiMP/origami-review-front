@@ -1,59 +1,41 @@
 <template>
     <div class="main main-raised mt-4">
         <div class="section section-basic">
-
-            <div class="container">
-                <div class="title"><h2>Add review for {{order.marketplace.name}}</h2></div>
+            <div v-show="!order.review" class="container">
+                <div class="title"><h2>Donnez votre avis sur {{order.marketplace.name}}</h2></div>
 
                 <div class="col-md-12">
 
-                    <div class="mt-5 mb-5" v-for="criteria in order.marketplace.marketplace_criteria">
-                        <div class="form-group row">
-                            <label class="col-sm-3" style="margin: auto"><h3>{{criteria.name}}</h3></label>
-                            <div class="col-sm-9">
-                                <div class="starrating risingstar d-flex float-left flex-row-reverse">
-                                    <input v-model="review.criteria[criteria.id]" type="radio" :id="criteria.id + '_5'"
-                                           :name="criteria.id" value="5"/><label :for="criteria.id + '_5'"
-                                                                                 title="Excellent">
-                                    <i class="material-icons">star</i>
-                                </label>
-                                    <input v-model="review.criteria[criteria.id]" type="radio" :id="criteria.id + '_4'"
-                                           :name="criteria.id" value="4"/><label :for="criteria.id + '_4'"
-                                                                                 title="Bon"><i
-                                        class="material-icons">star</i></label>
-                                    <input v-model="review.criteria[criteria.id]" type="radio" :id="criteria.id + '_3'"
-                                           :name="criteria.id" value="3"/><label :for="criteria.id + '_3'"
-                                                                                 title="Moyen"><i
-                                        class="material-icons">star</i></label>
-                                    <input v-model="review.criteria[criteria.id]" type="radio" :id="criteria.id + '_2'"
-                                           :name="criteria.id" value="2"/><label :for="criteria.id + '_2'"
-                                                                                 title="Bof"><i
-                                        class="material-icons">star</i></label>
-                                    <input v-model="review.criteria[criteria.id]" type="radio" :id="criteria.id + '_1'"
-                                           :name="criteria.id" value="1"/><label :for="criteria.id + '_1'"
-                                                                                 title="Mauvais"><i
-                                        class="material-icons">star</i></label>
+                    <form>
+
+                        <div class="mt-5 mb-5" v-for="criteria in order.marketplace.marketplace_criteria">
+                            <div class="form-group row">
+                                <label class="col-sm-3" style="margin: auto"><h3>{{criteria.name}}</h3></label>
+                                <div class="col-sm-9">
+                                    <div class="starrating risingstar d-flex float-left flex-row-reverse">
+                                        <star-rating-component font-size="60px" v-model="criteria.rating"
+                                                               :input-name="criteria.id"></star-rating-component>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="comment"><h3>Your comment</h3></label>
-                        <textarea v-model="review.text" class="form-control mt-5" id="comment" rows="8"></textarea>
-                    </div>
-
-                    <!--<div class="form-group">-->
-                    <!--<div class="btn-xs btn-group mr-2" role="group" aria-label="First group">-->
-                    <!--<button type="button" class="btn btn- btn-secondary-opacity">RAS</button>-->
-                    <!--</div>-->
-                    <!--<div class="btn-group mr-2" role="group" aria-label="Second group">-->
-                    <!--<button type="button" class="btn btn-secondary-opacity">TOP !</button>-->
-                    <!--</div>-->
-                    <!--<div class="btn-group mr-2" role="group" aria-label="Second group">-->
-                    <!--<button type="button" class="btn btn-secondary-opacity">....</button>-->
-                    <!--</div>-->
-                    <!--</div>-->
+                        <div class="form-group">
+                            <label for="comment"><h3>Votre commentaire</h3></label>
+                            <textarea v-model="review.text" class="form-control" id="comment" rows="8"></textarea>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<div class="btn-xs btn-group mr-2" role="group" aria-label="First group">-->
+                        <!--<button type="button" class="btn btn- btn-secondary-opacity">RAS</button>-->
+                        <!--</div>-->
+                        <!--<div class="btn-group mr-2" role="group" aria-label="Second group">-->
+                        <!--<button type="button" class="btn btn-secondary-opacity">TOP !</button>-->
+                        <!--</div>-->
+                        <!--<div class="btn-group mr-2" role="group" aria-label="Second group">-->
+                        <!--<button type="button" class="btn btn-secondary-opacity">....</button>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </form>
                 </div>
 
                 <div class="row mt-5">
@@ -78,15 +60,21 @@
                 <SignMetamaskTransactionPassword :showModal="signMetamaskTransactionModalShow"
                                                  :closeAction="modalMetamaskClose"></SignMetamaskTransactionPassword>
             </div>
+
+            <div v-show="order.review" class="container">
+                <div class="title"><h2>Review already given</h2></div>
+
+                <div class="col-md-12"></div>
+            </div>
         </div>
     </div>
-
 </template>
 
 <script>
   import ModalInstallMetamask from './ModalInstallMetamask';
   import ModalEnterMetamaskPassword from './ModalEnterMetamaskPassword';
   import SignMetamaskTransactionPassword from './SignMetamaskTransactionPassword';
+  import StarRatingComponent from './StarRatingComponent';
 
   export default {
     data() {
@@ -130,13 +118,13 @@
         else {
           this.signMetamaskTransactionModalShow = true;
           let review = context.getFormattedReview();
-          review.review_hash = web3.sha3(JSON.stringify(review));
+          review.hash = web3.sha3(JSON.stringify(review));
 
-          web3.eth.sign(web3.eth.accounts[0], review.review_hash, function (err, result) {
+          web3.eth.sign(web3.eth.accounts[0], review.hash, function (err, result) {
             if (err)
               this.signMetamaskTransactionModalShow = false;
             else {
-              review.review_signed_hash = result;
+              review.signed_hash = result;
               review.wallet = web3.eth.accounts[0];
 
               context.axios.post('/api/reviews', review).then((response) => {
@@ -177,10 +165,10 @@
           criteria: []
         };
 
-        Object.keys(context.review.criteria).map(function (key) {
+        context.order.marketplace.marketplace_criteria.forEach(function (value) {
           review.criteria.push({
-            marketplace_criteria_id: key,
-            rating: context.review.criteria[key]
+            marketplace_criteria_id: value.id,
+            rating: value.rating
           });
         });
 
@@ -190,7 +178,8 @@
     components: {
       SignMetamaskTransactionPassword,
       ModalInstallMetamask,
-      ModalEnterMetamaskPassword
+      ModalEnterMetamaskPassword,
+      StarRatingComponent
     }
   }
 </script>

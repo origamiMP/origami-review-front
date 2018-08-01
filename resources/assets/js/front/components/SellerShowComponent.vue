@@ -202,8 +202,7 @@
       }
     },
     created() {
-      console.log(this.$route.params.id);
-      this.axios.get('/api/sellers/' + this.$route.params.id).then((response) => {
+     this.axios.get('/api/sellers/' + this.$route.params.id).then((response) => {
         console.log(response.data);
         this.seller = response.data;
       });

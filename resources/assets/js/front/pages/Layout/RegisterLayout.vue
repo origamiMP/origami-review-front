@@ -70,6 +70,11 @@
   import GeneralContent from './Content.vue'
 
   export default {
+    beforeCreate() {
+      this.axios.get('/api/me').then((response) => {
+        this.$root.currentUser = response.data;
+      })
+    },
     components: {
       GeneralContent,
     }

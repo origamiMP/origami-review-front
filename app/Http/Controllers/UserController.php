@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         $currentUser = session('current_user');
 
-        if (!$currentUser) {
+        if (!$currentUser && session('api_token')) {
             $currentUser = $this->origami->get('me', ['include' => 'organization']);
             Session::put('current_user', $currentUser);
         }

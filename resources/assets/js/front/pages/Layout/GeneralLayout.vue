@@ -1,6 +1,7 @@
 <template>
     <div class="wrapper">
-        <header class="navbar navbar-color-on-scroll fixed-top navbar-expand-lg navbar-transparent" color-on-scroll="100">
+        <header class="navbar navbar-color-on-scroll fixed-top navbar-expand-lg navbar-transparent"
+                color-on-scroll="100">
             <div class="container-fluid pl-5 pr-5">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
                         aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +13,7 @@
                     Origami Review
                 </router-link>
 
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <div v-if="!this.$root.currentUser.email" class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav float-right ml-auto mt-2 mt-lg-0">
                         <li class="nav-item">
                             <router-link class="nav-link" to="/auth/register">S'inscrire</router-link>
@@ -21,6 +22,9 @@
                             <router-link class="nav-link" to="/auth/login">Se connecter</router-link>
                         </li>
                     </ul>
+                </div>
+                <div v-else>
+                    <a href="/admin" class="btn btn-xs">Vers le back office ></a>
                 </div>
             </div>
         </header>
@@ -69,6 +73,11 @@
   import GeneralContent from './Content.vue'
 
   export default {
+    beforeCreate() {
+      this.axios.get('/api/me').then((response) => {
+        this.$root.currentUser = response.data;
+      })
+    },
     components: {
       GeneralContent,
     }

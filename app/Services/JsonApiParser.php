@@ -2,10 +2,6 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Support\Facades\Auth;
-
 /**
  * Origami
  *

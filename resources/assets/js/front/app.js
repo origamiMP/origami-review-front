@@ -1,3 +1,5 @@
+import Chartist from "chartist";
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -42,4 +44,15 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   }
 });
-window.vm = new Vue(Vue.util.extend({router}, App)).$mount('#app');
+
+window.vm = new Vue({
+  el: '#app',
+  render: h => h(App),
+  router,
+  data: {
+    Chartist: Chartist,
+    currentUser: {organization: {}}
+  }
+});
+
+// window.vm = new Vue(Vue.util.extend({router}, App)).$mount('#app');
