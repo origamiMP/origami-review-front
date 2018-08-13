@@ -57,7 +57,11 @@ export default {
   beforeCreate() {
     this.axios.get('/api/me').then((response) => {
       this.$root.currentUser = response.data;
+      if (!this.$root.currentUser.email) {
+        this.$router.push('/auth/login');
+        window.location.reload()
+      }
     })
-  }
+  },
 }
 </script>

@@ -73,7 +73,7 @@ export default {
   methods: {
     updateProfile() {
       let context = this;
-      this.axios.put('/api/sellers/' + this.organization.id, this.organization).then((response) => {
+      this.axios.put('/api/'+ this.organization.type + 's/' + this.organization.id, this.organization).then((response) => {
         context.$root.currentUser.organization = this.organization;
       })
     }

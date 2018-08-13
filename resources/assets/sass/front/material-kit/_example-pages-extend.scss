@@ -316,8 +316,11 @@
         text-align: center;
 
         img{
+            object-fit: cover;
             max-width: 160px;
+            max-height: 160px;
             width: 100%;
+            height: 100%;
             margin: 0 auto;
             @include transform-translate-y(-50%);
         }

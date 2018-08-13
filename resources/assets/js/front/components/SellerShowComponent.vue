@@ -42,9 +42,9 @@
                                             <div class="col-md-3"></div>
                                             <div class="col-md-6">
                                                 <star-rating-component
-                                                        v-model="seller.average_verified_rating"
+                                                        :value="Math.round(seller.average_verified_rating)"
                                                         :input-name="seller.name + 'Rating'"
-                                                        font-size="60px"/>
+                                                        font-size="60px" :disabled="true"/>
                                             </div>
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-3" style="margin: auto;">
-                                            <star-rating-component v-model="review.rating" :input-name="review.id"/>
+                                            <star-rating-component v-model="review.rating" :input-name="review.id" :disabled="true"/>
                                         </div>
                                         <div class="col-md-9" style="margin: auto;">
                                             <span class="text-gray float-right">publiée le {{review.created_at.date}}</span>
@@ -203,7 +203,6 @@
     },
     created() {
      this.axios.get('/api/sellers/' + this.$route.params.id).then((response) => {
-        console.log(response.data);
         this.seller = response.data;
       });
     },

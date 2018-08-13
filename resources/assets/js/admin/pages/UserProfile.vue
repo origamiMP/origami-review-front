@@ -6,6 +6,13 @@
 
         </user-card>
       </div>
+
+      <div v-if="this.$root.currentUser.organization.type === 'marketplace'" class="md-layout-item md-medium-size-100 md-size-100">
+        <md-card class="md-card-profile">
+          <md-card-content>
+          </md-card-content>
+        </md-card>
+      </div>
     </div>
   </div>
 </template>

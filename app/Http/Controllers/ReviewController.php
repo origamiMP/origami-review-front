@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-
 class ReviewController extends Controller
 {
     public function index()
@@ -16,7 +13,7 @@ class ReviewController extends Controller
 
     public function show($id)
     {
-        $reviews = $this->origami->get('reviews/'.$id, ['include' => 'review_comments,review_state,order.products,order.marketplace,order.seller,order.customer']);
+        $reviews = $this->origami->get('reviews/'.$id, ['include' => 'review_comments.author,review_state,order.products,order.marketplace,order.seller,order.customer']);
 
         return response()->json($reviews);
     }
@@ -24,6 +21,18 @@ class ReviewController extends Controller
     public function store()
     {
         $response = $this->origami->post('reviews', request()->all());
+        return response()->json($response);
+    }
+
+    public function accept($id)
+    {
+        $response = $this->origami->post('reviews/'.$id.'/accept');
+        return response()->json($response);
+    }
+
+    public function refuse($id)
+    {
+        $response = $this->origami->post('reviews/'.$id.'/refuse', request()->all());
         return response()->json($response);
     }
 }

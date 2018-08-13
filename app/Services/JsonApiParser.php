@@ -21,6 +21,7 @@ class JsonApiParser
     {
         $this->response = json_decode($jsonApiResponse);
         if (is_array($this->response->data)) {
+            $this->arrayReturn = [];
             foreach ($this->response->data as $data) {
                 $arrayTmp = $data->attributes;
                 $arrayTmp->id = $data->id;

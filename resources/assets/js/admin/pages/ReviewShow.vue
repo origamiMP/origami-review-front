@@ -85,7 +85,10 @@
                             <hr/>
                             <div class="md-layout md-gutter">
                                 <div class="md-layout-item md-size-25"><b>Note</b></div>
-                                <div class="md-layout-item">{{review.rating}} / 5</div>
+                                <div class="md-layout-item">
+                                    <star-rating-component :value="review.rating" :input-name="review.id + 'Rating'"
+                                                           :disabled="true"/>
+                                </div>
                             </div>
                             <hr/>
                             <div class="md-layout md-gutter">
@@ -94,27 +97,55 @@
                             </div>
                         </md-card-content>
                         <md-card-actions md-alignment="space-between">
-                            <div>
-                                <md-button>Refuser avis</md-button>
+                            <div v-if="review.review_state.name === 'CREATED'">
+                                <md-button @click.native="showModal = true">Refuser avis</md-button>
                             </div>
 
                             <md-card-expand-trigger>
-                                <md-button class="md-success">Accepter Avis</md-button>
+                                <md-button @click.native="accept" class="md-success">Accepter Avis</md-button>
                             </md-card-expand-trigger>
                         </md-card-actions>
                     </md-card>
                 </div>
             </div>
+            <div v-if="review.review_comments.length > 0"
+                 class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
+                <md-card>
+                    <md-card-header data-background-color="primary">
+                        <h4 class="title">Commentaires de l'avis</h4>
+                    </md-card-header>
+                    <md-card-content>
+                        <div v-for="review_comment in review.review_comments">
+                            <div class="md-layout md-gutter">
+                                <div class="md-layout-item md-size-25"><b>{{ review_comment.author.name}} :</b></div>
+                                <div class="md-layout-item">{{review_comment.text}}</div>
+                            </div>
+                            <hr/>
+                        </div>
+
+                        <md-field maxlength="10">
+                            <label>Commentaire</label>
+                            <md-textarea rows="10" v-model="comment"></md-textarea>
+                        </md-field>
+                    </md-card-content>
+                    <md-card-actions>
+                        <md-button class="md-primary" @click.native="addComment">Envoyer</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
         </div>
+        <modal-refuse-review ref="modalRefuseReview" :validateAction="refuse"
+                             :showModal="showModal"></modal-refuse-review>
     </div>
 </template>
 
 <script>
+  import StarRatingComponent from "../components/StarRatingComponent"
+  import ModalRefuseReview from "../components/ModalRefuseReview"
+
   export default {
     created() {
-      this.axios.get('/api/reviews/' + this.$route.params.id).then((response) => {
-        this.review = response.data;
-      });
+      this.getReview()
     },
     data() {
       return {
@@ -125,10 +156,36 @@
             customer: {},
             products: []
           },
-          review_comments: []
-        }
+          review_comments: [],
+          review_state: {}
+        },
+        showModal: false,
+        comment: ''
       }
     },
+    methods: {
+      accept() {
+        this.axios.post('/api/reviews/' + this.review.id + '/accept').then((response) => {
+          this.$router.push('/admin/reviews');
+        });
+      },
+      refuse() {
+        this.axios.post('/api/reviews/' + this.review.id + '/refuse', {text: this.$refs.modalRefuseReview.refuse_comment}).then((response) => {
+          this.$router.push('/admin/reviews');
+        });
+      },
+      addComment() {
+        this.axios.post('/api/reviews/' + this.review.id + '/comments', {text: this.comment}).then((response) => {
+          this.getReview()
+        });
+      },
+      getReview() {
+        this.axios.get('/api/reviews/' + this.$route.params.id).then((response) => {
+          this.review = response.data;
+        });
+      }
+    },
+    components: {StarRatingComponent, ModalRefuseReview}
   }
 </script>
 

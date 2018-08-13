@@ -195,6 +195,8 @@ class OrigamiReviewApi
         elseif ($statusCode == 204)
             return [];
 
+//        dd(json_decode($response));
+
         return (new JsonApiParser())->parse($response);
     }
 
@@ -224,5 +226,11 @@ class OrigamiReviewApi
             throw new OrigamiReviewApiException($response, $statusCode);
 
         Session::put('api_token', $response->access_token);
+    }
+
+    public function logout()
+    {
+        Session::forget('api_token');
+        Session::forget('current_user');
     }
 }

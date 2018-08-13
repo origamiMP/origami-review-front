@@ -20,6 +20,13 @@ class UserController extends Controller
         return response()->json();
     }
 
+    public function logout()
+    {
+        $this->origami->logout();
+
+        return response()->json();
+    }
+
     public function current()
     {
         $currentUser = session('current_user');
