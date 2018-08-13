@@ -42,7 +42,7 @@
                                             <div class="col-md-3"></div>
                                             <div class="col-md-6">
                                                 <star-rating-component
-                                                        :value="Math.round(seller.average_verified_rating)"
+                                                        v-model="seller.average_verified_rating"
                                                         :input-name="seller.name + 'Rating'"
                                                         font-size="60px" :disabled="true"/>
                                             </div>
@@ -127,7 +127,7 @@
                                     </div>
                                     <hr/>
                                     <div>{{review.text}}</div>
-                                    <div class="text-gray float-right">{{review.ddb_supplier}}_node_id: {{review.ddb_node_id}}</div>
+                                    <div class="text-gray float-right">Commandé sur <a href="#" >{{review.order.marketplace.name}}</a></div>
                                 </div>
                             </div>
 

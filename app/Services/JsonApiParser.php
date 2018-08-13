@@ -59,11 +59,13 @@ class JsonApiParser
                 }
                 $context->$key = $array;
             } else {
-                $idx = array_search($key . 's', array_column($this->response->included, 'type'));
-                $context->$key = $this->response->included[$idx]->attributes;
-                $context->$key->id = $this->response->included[$idx]->id;
-                if (isset($this->response->included[$idx]->relationships))
-                    $context->$key = $this->constructRelationship($this->response->included[$idx]->relationships, $context->$key);
+                $includedRelationship = array_values(array_filter($this->response->included, function($elem) use ($relationship) {
+                    return $elem->id == $relationship->data->id && $elem->type == $relationship->data->type;
+                }))[0];
+                $context->$key = $includedRelationship->attributes;
+                $context->$key->id = $includedRelationship->id;
+                if (isset($includedRelationship->relationships))
+                    $context->$key = $this->constructRelationship($includedRelationship->relationships, $context->$key);
             }
         }
 

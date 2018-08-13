@@ -1,7 +1,7 @@
 <template>
     <div class="starrating">
         <input v-model="value" v-on:click="$emit('input', 5)" type="radio"
-               :id="inputName + 'star1'" value="1"
+               :id="inputName + 'star1'" value="5"
                :name="inputName" :disabled="disabled"/>
         <label :for="inputName + 'star1'"><i v-bind:style="fontSizeStyle" class="fa fa-star"></i></label>
         <input v-model="value" v-on:click="$emit('input', 4)" type="radio"
