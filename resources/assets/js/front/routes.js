@@ -4,6 +4,7 @@ import SellerShowComponent from './components/SellerShowComponent';
 import RegisterPage from './pages/Register';
 import LoginPage from './pages/Login';
 import SellerListPage from './pages/SellerList'
+import DemoGiveOpinionPage from './pages/DemoGiveOpinion';
 
 import GeneralLayout from './pages/Layout/GeneralLayout';
 import RegisterLayout from './pages/Layout/RegisterLayout';
@@ -13,7 +14,7 @@ const routes = [
     path: '/',
     component: GeneralLayout,
     children: [
-      {name: 'ReviewCreate', path: '/reviews/new', component: ReviewCreateComponent},
+      {name: 'DemoGiveOpinion', path: '/reviews/new', component: DemoGiveOpinionPage},
       {name: 'ReviewCreateSuccess', path: '/reviews/new/success', component: ReviewCreateSuccessComponent},
       {name: 'SellerShowComponent', path: '/sellers/:id', component: SellerShowComponent},
       {name: 'SellerListPage', path: '/', component: SellerListPage},

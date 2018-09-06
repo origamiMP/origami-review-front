@@ -102,9 +102,9 @@
                                 </div>
                             </div>
                             <!--<div class="tab-pane" id="pill2">-->
-                                <!--Efficiently unleash cross-media information without cross-media value. Quickly maximize-->
-                                <!--timely deliverables for real-time schemas.-->
-                                <!--<br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.-->
+                            <!--Efficiently unleash cross-media information without cross-media value. Quickly maximize-->
+                            <!--timely deliverables for real-time schemas.-->
+                            <!--<br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.-->
                             <!--</div>-->
                         </div>
                     </div>
@@ -114,11 +114,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
-                            <div v-for="review in seller.reviews" class="card" style="margin-bottom: 20px">
+                            <div v-for="review in seller.reviews" class="card" style="margin-bottom: 20px"
+                                 v-bind:class="{certified: review.wallet}">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-3" style="margin: auto;">
-                                            <star-rating-component v-model="review.rating" :input-name="review.id" :disabled="true"/>
+                                            <star-rating-component v-model="review.rating" :input-name="review.id"
+                                                                   :disabled="true"/>
                                         </div>
                                         <div class="col-md-9" style="margin: auto;">
                                             <span class="text-gray float-right">publiée le {{review.created_at.date}}</span>
@@ -127,27 +129,32 @@
                                     </div>
                                     <hr/>
                                     <div>{{review.text}}</div>
-                                    <div class="text-gray float-right">Commandé sur <a href="#" >{{review.order.marketplace.name}}</a></div>
+                                    <div class="text-gray float-right" style="text-align: right">
+                                        <div>Commandé sur <a href="#">{{review.order.marketplace.name}}</a></div>
+                                        <div v-if="review.wallet" style="font-size: 12px !important">
+                                            <i style="font-size: 12px !important" class="material-icons">lock</i> IPSF node id : {{review.ddb_node_id}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!--<nav aria-label="..." class="mt-5">-->
-                                <!--<ul class="pagination justify-content-center">-->
-                                    <!--<li class="page-item disabled">-->
-                                        <!--<span class="page-link">Previous</span>-->
-                                    <!--</li>-->
-                                    <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
-                                    <!--<li class="page-item active">-->
-                                      <!--<span class="page-link">-->
-                                        <!--2-->
-                                        <!--<span class="sr-only">(current)</span>-->
-                                      <!--</span>-->
-                                    <!--</li>-->
-                                    <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-                                    <!--<li class="page-item">-->
-                                        <!--<a class="page-link" href="#">Next</a>-->
-                                    <!--</li>-->
-                                <!--</ul>-->
+                            <!--<ul class="pagination justify-content-center">-->
+                            <!--<li class="page-item disabled">-->
+                            <!--<span class="page-link">Previous</span>-->
+                            <!--</li>-->
+                            <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+                            <!--<li class="page-item active">-->
+                            <!--<span class="page-link">-->
+                            <!--2-->
+                            <!--<span class="sr-only">(current)</span>-->
+                            <!--</span>-->
+                            <!--</li>-->
+                            <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                            <!--<li class="page-item">-->
+                            <!--<a class="page-link" href="#">Next</a>-->
+                            <!--</li>-->
+                            <!--</ul>-->
                             <!--</nav>-->
                         </div>
                         <div class="col-md-4">
@@ -202,7 +209,7 @@
       }
     },
     created() {
-     this.axios.get('/api/sellers/' + this.$route.params.id).then((response) => {
+      this.axios.get('/api/sellers/' + this.$route.params.id).then((response) => {
         this.seller = response.data;
       });
     },
@@ -245,3 +252,9 @@
     }
   }
 </script>
+
+<style scoped lang="scss">
+    .certified {
+        border: 2px solid #e72b54;
+    }
+</style>

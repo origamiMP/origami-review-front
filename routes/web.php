@@ -14,11 +14,13 @@
 Route::prefix('api')->group(function () {
 
     Route::get('/orders/{id}', 'OrderController@show');
+    Route::post('/orders/simulate', 'OrderController@demoSimulate');
 
     Route::get('/sellers', 'SellerController@index');
     Route::get('/sellers/{id}', 'SellerController@show');
     Route::put('/sellers/{id}', 'SellerController@update');
 
+    Route::get('/marketplaces', 'MarketplaceController@index');
     Route::put('/marketplaces/{id}', 'MarketplaceController@update');
 
     Route::post('/users', 'UserController@store');

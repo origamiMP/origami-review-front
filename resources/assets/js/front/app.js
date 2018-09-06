@@ -7,6 +7,7 @@ import Chartist from "chartist";
  */
 
 require('./material-kit/core/bootstrap-material-design.min');
+require('./material-kit/plugins/bootstrap-selectpicker');
 require('./material-kit/material-kit');
 
 import Vue from 'vue';
