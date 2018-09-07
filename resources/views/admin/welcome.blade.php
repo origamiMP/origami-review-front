@@ -19,6 +19,6 @@
 </body>
 
 {{--<script src="{{asset('js/app.js')}}"></script>--}}
-<script src="{{secure_asset('js/admin.js')}}"></script>
+<script src="{{mix('js/admin.js')}}"></script>
 
 </html>
