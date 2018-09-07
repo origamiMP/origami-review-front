@@ -1,4 +1,4 @@
-<template>
+<template xmlns:on="http://www.w3.org/1999/xhtml">
     <div class="profile-page">
         <div class="page-header header-filter" data-parallax="true"
              :style="'margin-top: -20px;height: 300px; background-image: url('+ seller.image_cover +');'"></div>
@@ -138,6 +138,8 @@
                                 </div>
                             </div>
 
+                            <button class="btn btn-primary" v-on:click="giveOpinion">Give my opinion</button>
+
                             <!--<nav aria-label="..." class="mt-5">-->
                             <!--<ul class="pagination justify-content-center">-->
                             <!--<li class="page-item disabled">-->
@@ -213,7 +215,6 @@
         this.seller = response.data;
       });
     },
-    methods: {},
     computed: {
       fiveRatingRatio() {
         return parseFloat(this.seller.five_rating_reviews_ratio) * 100 + '%'
@@ -248,6 +249,11 @@
           default:
             return "Sans Avis";
         }
+      }
+    },
+    methods: {
+      giveOpinion() {
+        this.$router.push('/reviews/new');
       }
     }
   }
