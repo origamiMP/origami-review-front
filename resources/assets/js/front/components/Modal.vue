@@ -1,12 +1,14 @@
 <template>
     <div>
-        <div :class="{modal: true, fade: true, show: showModal}" :style="{ display: showModal ? 'block' : 'none' }"
+        <div :class="{modal: true, fade: true, show: showModal}" :style="{
+        display: showModal ? 'block' : 'none' }"
              tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog" role="document" :style="{height: modalHeight, width: modalWidth}">
                 <div class="modal-content">
                     <div v-if="this.$slots.header || closeAction" class="modal-header">
                         <slot name="header"></slot>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeAction">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                @click="closeAction">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -27,7 +29,9 @@
   export default {
     props: {
       showModal: Boolean,
-      closeAction: Function
+      closeAction: Function,
+      modalHeight: String,
+      modalWidth: String
     }
   }
 </script>

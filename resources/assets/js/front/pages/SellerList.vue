@@ -6,8 +6,8 @@
                 <div class="row">
                     <div class="col-md-8 ml-auto mr-auto text-center">
                         <div class="brand">
-                            <h1 class="title">Trouvez une entreprise !</h1>
-                            <h4>Lisez des avis. Publiez des avis. Trouvez des entreprises.</h4>
+                            <h1 class="title">Find a Brand !</h1>
+                            <h4>A new way to review.</h4>
                             <div class="card">
                                 <div class="card-body">
                                     <div class="input-group">
@@ -17,7 +17,7 @@
                                               </span>
                                         </div>
                                         <input v-model="search" type="text" class="form-control"
-                                               placeholder="Recherchez une entreprise">
+                                               placeholder="Find among thousands of brands">
                                     </div>
                                 </div>
                             </div>
