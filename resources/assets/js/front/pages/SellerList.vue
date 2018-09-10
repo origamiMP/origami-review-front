@@ -45,7 +45,7 @@
                                     <!--<h6 class="card-category text-gray">Vendeur</h6>-->
                                 </div>
                                 <div class="card-footer justify-content-center">
-                                    <star-rating-component v-model="organization.average_verified_rating" :input-name="organization.name + 'Rating'"/>
+                                    <star-rating-component v-model="organization.average_rating" :input-name="organization.name + 'Rating'"/>
                                 </div>
                             </div>
                         </div>

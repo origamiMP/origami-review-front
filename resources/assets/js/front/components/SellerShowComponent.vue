@@ -216,19 +216,19 @@
     },
     computed: {
       fiveRatingRatio() {
-        return parseFloat(this.seller.five_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.seller.five_rating_reviews_ratio) + '%'
       },
       fourRatingRatio() {
-        return parseFloat(this.seller.four_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.seller.four_rating_reviews_ratio) + '%'
       },
       threeRatingRatio() {
-        return parseFloat(this.seller.three_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.seller.three_rating_reviews_ratio) + '%'
       },
       twoRatingRatio() {
-        return parseFloat(this.seller.two_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.seller.two_rating_reviews_ratio) + '%'
       },
       oneRatingRatio() {
-        return parseFloat(this.seller.one_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.seller.one_rating_reviews_ratio) + '%'
       },
       countTrustedReviews() {
         return this.seller.reviews.length;
