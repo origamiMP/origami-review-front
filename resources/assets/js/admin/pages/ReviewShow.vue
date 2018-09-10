@@ -107,8 +107,8 @@
                                 <md-button v-if="review.review_state.name === 'CREATED'" @click.native="showModal = true">Refuse review</md-button>
                             </div>
 
-                            <md-card-expand-trigger>
-                                <md-button v-if="review.review_state.name !== 'ACCEPTED' && review.review_state.name !== 'CERTIFIED'" @click.native="accept" class="md-success">Accept review</md-button>
+                            <md-card-expand-trigger v-if="review.review_state.name !== 'ACCEPTED' && review.review_state.name !== 'CERTIFIED'">
+                                <md-button @click.native="accept" class="md-success">Accept review</md-button>
                             </md-card-expand-trigger>
                         </md-card-actions>
                     </md-card>
