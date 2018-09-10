@@ -5,7 +5,7 @@
                 <div class="logo-img"><img :src="this.$root.currentUser.organization.image_profile" alt=""></div>
             </a>
 
-            <a :href="'http://'+this.$root.currentUser.organization.website_link" target="_blank"
+            <a :href="this.$root.currentUser.organization.website_link" target="_blank"
                class="simple-text logo-normal">
                 {{this.$root.currentUser.organization.name}}
             </a>
