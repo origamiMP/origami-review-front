@@ -131,7 +131,7 @@
                                     <div class="text-gray float-right" style="text-align: right">
                                         <div>Seller : <router-link :to="'/sellers/'+ review.order.seller.id">{{review.order.seller.name}}</router-link></div>
                                         <div v-if="review.wallet" style="font-size: 12px !important">
-                                            <i style="font-size: 12px !important" class="material-icons">lock</i> IPSF node id : {{review.ddb_node_id}}
+                                            <i style="font-size: 12px !important" class="material-icons">lock</i> IPFS node id : {{review.ddb_node_id}}
                                         </div>
                                     </div>
                                 </div>
