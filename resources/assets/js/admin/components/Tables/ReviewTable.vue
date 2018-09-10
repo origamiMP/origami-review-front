@@ -15,7 +15,7 @@
                 <md-table-cell md-label="Created_at">{{ item.created_at }}</md-table-cell>
                 <md-table-cell>
                     <md-button :to="'/admin/reviews/' + item.id" class="md-primary md-just-icon">
-                        <md-icon v-if="item.review_state.name === 'ACCEPTED'">visibility</md-icon>
+                        <md-icon v-if="item.review_state.name === 'ACCEPTED' || item.review_state.name === 'CERTIFIED'">visibility</md-icon>
                         <md-icon v-else>edit</md-icon>
                     </md-button>
                 </md-table-cell>
