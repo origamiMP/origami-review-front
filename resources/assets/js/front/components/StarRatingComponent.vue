@@ -1,5 +1,11 @@
 <template>
-    <div class="starrating d-flex float-left flex-row-reverse">
+    <div v-bind:class="{
+    'starrating': true,
+    'd-flex': true,
+    'float-left': true,
+    'flex-row-reverse': true,
+    'editable': this.editable,
+    }">
         <input v-model="computedValue" v-on:click="$emit('input', 5)" type="radio"
                :id="inputName + 'star1'" value="5"
                :name="inputName" :disabled="disabled"/>
@@ -30,6 +36,10 @@
         type: Boolean,
         default: false
       },
+      editable: {
+        type: Boolean,
+        default: false
+      },
       inputName: String,
       value: {
         type: Number,
@@ -42,8 +52,11 @@
     },
     computed: {
       computedValue: {
-        get() {return this.value},
-        set(newValue) {},
+        get() {
+          return this.value
+        },
+        set(newValue) {
+        },
       }
     },
     data() {

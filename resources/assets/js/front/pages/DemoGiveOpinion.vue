@@ -63,9 +63,9 @@
                         <div class="form-group row">
                             <label class="col-sm-3" style="margin: auto"><h3>{{criteria.name}}</h3></label>
                             <div class="col-sm-9">
-                                <div class="starrating risingstar d-flex float-left flex-row-reverse">
+                                <div class="starrating editable risingstar d-flex float-left flex-row-reverse">
                                     <star-rating-component font-size="60px" v-model="criteria.rating"
-                                                           :input-name="criteria.id"></star-rating-component>
+                                                           :input-name="criteria.id" :editable="true"></star-rating-component>
                                 </div>
                             </div>
                         </div>
