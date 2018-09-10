@@ -129,12 +129,12 @@
                             <hr/>
                         </div>
 
-                        <md-field v-if="review.state.name === 'REFUSED'" maxlength="10">
+                        <md-field v-if="review.review_state.name === 'REFUSED'" maxlength="10">
                             <label>Comment</label>
                             <md-textarea rows="10" v-model="comment"></md-textarea>
                         </md-field>
                     </md-card-content>
-                    <md-card-actions v-if="review.state.name === 'REFUSED'">
+                    <md-card-actions v-if="review.review_state.name === 'REFUSED'">
                         <md-button class="md-primary" @click.native="addComment">Send</md-button>
                     </md-card-actions>
                 </md-card>
