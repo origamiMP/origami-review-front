@@ -85,7 +85,7 @@
                                     <md-icon v-if="review.review_state.name === 'ACCEPTED'">done</md-icon>
                                     <md-icon v-if="review.review_state.name === 'CERTIFIED'">done</md-icon>
                                     <md-icon v-if="review.review_state.name === 'CREATED'">hourglass_empty</md-icon>
-                                    <md-icon v-if="review.review_state.name === 'CLEAR'">clear</md-icon>
+                                    <md-icon v-if="review.review_state.name === 'REFUSED'">clear</md-icon>
                                 </div>
                             </div>
                             <hr/>
