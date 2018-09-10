@@ -7,7 +7,7 @@
                     <star-rating-component :value="item.rating" :input-name="item.id + 'Rating'" :disabled="true"/>
                 </md-table-cell>
                 <md-table-cell md-label="State">{{ item.review_state.name }}</md-table-cell>
-                <md-table-cell md-label="Created_at">{{ item.created_at.date }}</md-table-cell>
+                <md-table-cell md-label="Created_at">{{ item.created_at }}</md-table-cell>
                 <md-table-cell>
                     <md-button :to="'/admin/reviews/' + item.id" class="md-primary md-just-icon">
                         <md-icon>edit</md-icon>

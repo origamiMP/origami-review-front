@@ -4,7 +4,7 @@
             <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
                 <md-card>
                     <md-card-header data-background-color="primary">
-                        <h4 class="title">Liste des avis</h4>
+                        <h4 class="title">Reviews List</h4>
                     </md-card-header>
                     <md-card-content>
                         <review-table :reviews="reviews" table-header-color="primary"></review-table>

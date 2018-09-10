@@ -21,6 +21,7 @@ Route::prefix('api')->group(function () {
     Route::put('/sellers/{id}', 'SellerController@update');
 
     Route::get('/marketplaces', 'MarketplaceController@index');
+    Route::get('/marketplaces/{id}', 'MarketplaceController@show');
     Route::put('/marketplaces/{id}', 'MarketplaceController@update');
 
     Route::post('/users', 'UserController@store');

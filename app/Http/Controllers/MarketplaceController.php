@@ -15,7 +15,7 @@ class MarketplaceController extends Controller
 
     public function show($id)
     {
-        $marketplace = $this->origami->get('marketplaces/'.$id, ['include' => 'reviews']);
+        $marketplace = $this->origami->get('marketplaces/'.$id, ['include' => 'reviews.order.seller']);
 
         return response()->json($marketplace);
     }

@@ -31,21 +31,21 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-md-3" v-for="seller in sellers">
+                        <div class="col-md-3" v-for="organization in organizations">
                             <div class="card card-profile ml-auto mr-auto" style="max-width: 360px">
                                 <div class="card-header card-header-image">
-                                    <router-link :to="'/sellers/' + seller.id">
-                                        <img class="img" :src="seller.image_profile"/>
+                                    <router-link :to="'/' + organization.type + 's/' + organization.id">
+                                        <img class="img" :src="organization.image_profile"/>
                                     </router-link>
                                     <!--<div class="colored-shadow"-->
                                     <!--:style="'background-image: url(' + seller.image_profile + '); opacity: 1;'"></div>-->
                                 </div>
                                 <div class="card-body ">
-                                    <h4 class="card-title">{{ seller.name }}</h4>
+                                    <h4 class="card-title">{{ organization.name }}</h4>
                                     <!--<h6 class="card-category text-gray">Vendeur</h6>-->
                                 </div>
                                 <div class="card-footer justify-content-center">
-                                    <star-rating-component v-model="seller.average_verified_rating" :input-name="seller.name + 'Rating'"/>
+                                    <star-rating-component v-model="organization.average_verified_rating" :input-name="organization.name + 'Rating'"/>
                                 </div>
                             </div>
                         </div>
@@ -66,18 +66,24 @@
     data() {
       return {
         search: '',
-        sellers: [],
+        organizations: [],
       }
     },
     beforeCreate() {
       this.axios.get('/api/sellers/').then((response) => {
-        this.sellers = response.data;
+        this.organizations = [...this.organizations, ...response.data];
+      });
+      this.axios.get('/api/marketplaces/').then((response) => {
+        this.organizations = [...this.organizations, ...response.data];
       });
     },
     watch: {
       search: function (newSearch, oldSearch) {
         this.axios.get('/api/sellers?search=' + newSearch).then((response) => {
-          this.sellers = response.data;
+          let sellers = response.data;
+          this.axios.get('/api/marketplaces?search=' + newSearch).then((response) => {
+            this.organizations = [...response.data, ...sellers];
+          });
         });
       }
     }

@@ -4,7 +4,7 @@
             <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
                 <md-card>
                     <md-card-header data-background-color="primary">
-                        <h4 class="title">Récapitulatif de la commande</h4>
+                        <h4 class="title">Order Summary</h4>
                     </md-card-header>
                     <md-card-content>
                         <div class="md-layout md-gutter">
@@ -18,7 +18,7 @@
                         </div>
                         <hr/>
                         <div class="md-layout md-gutter">
-                            <div class="md-layout-item md-size-25"><b>Date de la commande</b></div>
+                            <div class="md-layout-item md-size-25"><b>Order date</b></div>
                             <div class="md-layout-item">{{review.order.date}}</div>
                         </div>
                         <hr/>
@@ -28,18 +28,19 @@
                         </div>
                         <hr/>
                         <div class="md-layout md-gutter mb-5">
-                            <div class="md-layout-item md-size-25"><b>Produits</b></div>
+                            <div class="md-layout-item md-size-25"><b>Products</b></div>
+                            <div class="md-layout-item">(Fictionnal Products)</div>
                         </div>
-                        <div v-for="product in review.order.products">
-                            <div class="md-layout md-gutter mt-5 order-product">
-                                <div class="md-layout-item md-size-25 text-center">
-                                    <div class="order-product-image"><img :src="product.image"></div>
-                                </div>
-                                <div class="md-layout-item md-size-25">{{product.name}}</div>
-                                <div class="md-layout-item md-size-25">{{product.quantity}}</div>
-                                <div class="md-layout-item md-size-25">{{product.price}} €</div>
-                            </div>
-                        </div>
+                        <!--<div v-for="product in review.order.products">-->
+                            <!--<div class="md-layout md-gutter mt-5 order-product">-->
+                                <!--<div class="md-layout-item md-size-25 text-center">-->
+                                    <!--<div class="order-product-image"><img :src="product.image"></div>-->
+                                <!--</div>-->
+                                <!--<div class="md-layout-item md-size-25">{{product.name}}</div>-->
+                                <!--<div class="md-layout-item md-size-25">{{product.quantity}}</div>-->
+                                <!--<div class="md-layout-item md-size-25">{{product.price}} €</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </md-card-content>
                 </md-card>
             </div>
@@ -47,7 +48,7 @@
                 <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
                     <md-card>
                         <md-card-header data-background-color="primary">
-                            <h4 class="title">Information du client</h4>
+                            <h4 class="title">Customer information</h4>
                         </md-card-header>
                         <md-card-content>
                             <div class="md-layout md-gutter">
@@ -56,12 +57,12 @@
                             </div>
                             <hr/>
                             <div class="md-layout md-gutter">
-                                <div class="md-layout-item md-size-25"><b>Nom du client</b></div>
+                                <div class="md-layout-item md-size-25"><b>Customer Name</b></div>
                                 <div class="md-layout-item">{{review.order.customer.name}}</div>
                             </div>
                             <hr/>
                             <div class="md-layout md-gutter">
-                                <div class="md-layout-item md-size-25"><b>Email du client</b></div>
+                                <div class="md-layout-item md-size-25"><b>Customer Email</b></div>
                                 <div class="md-layout-item">{{review.order.customer.email}}</div>
                             </div>
                         </md-card-content>
@@ -70,7 +71,7 @@
                 <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
                     <md-card>
                         <md-card-header data-background-color="primary">
-                            <h4 class="title">Avis du client</h4>
+                            <h4 class="title">Customer Review</h4>
                         </md-card-header>
                         <md-card-content>
                             <div class="md-layout md-gutter">
@@ -79,12 +80,12 @@
                             </div>
                             <hr/>
                             <div class="md-layout md-gutter">
-                                <div class="md-layout-item md-size-25"><b>Statut</b></div>
+                                <div class="md-layout-item md-size-25"><b>State</b></div>
                                 <div class="md-layout-item">{{review.review_state.name}}</div>
                             </div>
                             <hr/>
                             <div class="md-layout md-gutter">
-                                <div class="md-layout-item md-size-25"><b>Note</b></div>
+                                <div class="md-layout-item md-size-25"><b>Rating</b></div>
                                 <div class="md-layout-item">
                                     <star-rating-component :value="review.rating" :input-name="review.id + 'Rating'"
                                                            :disabled="true"/>
@@ -92,17 +93,17 @@
                             </div>
                             <hr/>
                             <div class="md-layout md-gutter">
-                                <div class="md-layout-item md-size-25"><b>Commentaire</b></div>
+                                <div class="md-layout-item md-size-25"><b>Comment</b></div>
                                 <div class="md-layout-item">{{review.text}}</div>
                             </div>
                         </md-card-content>
                         <md-card-actions md-alignment="space-between">
                             <div v-if="review.review_state.name === 'CREATED'">
-                                <md-button @click.native="showModal = true">Refuser avis</md-button>
+                                <md-button @click.native="showModal = true">Refuse review</md-button>
                             </div>
 
                             <md-card-expand-trigger>
-                                <md-button @click.native="accept" class="md-success">Accepter Avis</md-button>
+                                <md-button @click.native="accept" class="md-success">Accept review</md-button>
                             </md-card-expand-trigger>
                         </md-card-actions>
                     </md-card>
@@ -112,7 +113,7 @@
                  class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
                 <md-card>
                     <md-card-header data-background-color="primary">
-                        <h4 class="title">Commentaires de l'avis</h4>
+                        <h4 class="title">Reviews comments</h4>
                     </md-card-header>
                     <md-card-content>
                         <div v-for="review_comment in review.review_comments">
@@ -124,12 +125,12 @@
                         </div>
 
                         <md-field maxlength="10">
-                            <label>Commentaire</label>
+                            <label>Comment</label>
                             <md-textarea rows="10" v-model="comment"></md-textarea>
                         </md-field>
                     </md-card-content>
                     <md-card-actions>
-                        <md-button class="md-primary" @click.native="addComment">Envoyer</md-button>
+                        <md-button class="md-primary" @click.native="addComment">Send</md-button>
                     </md-card-actions>
                 </md-card>
             </div>

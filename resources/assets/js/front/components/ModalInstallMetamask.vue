@@ -1,9 +1,9 @@
 <template>
     <modal :showModal="showModal" :closeAction="closeAction" :modalHeight="'70vh'" :modalWidth="'70vh'">
-        <h1 slot="header">Installer Metamask</h1>
+        <h3 slot="header">Installer Metamask</h3>
 
-        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half" slot="body">
-            <iframe class="embed-responsive-item" src="https://metamask.io" allowfullscreen></iframe>
+        <div slot="body">
+            <a href="http://metamask.io" target="_blank"><img style="height: auto; width: 100%" src="/images/metamask_logo.png"/></a>
         </div>
         <div slot="footer">
             <button @click="validateAction" class="btn btn-primary">J'ai installé Metamask</button>

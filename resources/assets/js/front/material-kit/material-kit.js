@@ -273,9 +273,9 @@ $(document).ready(function() {
   });
 
   // Activate bootstrap-select
-  if ($(".selectpicker").length != 0) {
-    $(".selectpicker").selectpicker();
-  }
+  // if ($(".selectpicker").length != 0) {
+  //   $(".selectpicker").selectpicker();
+  // }
 
   // Activate Popovers
   $('[data-toggle="popover"]').popover();

@@ -1,6 +1,19 @@
 <template>
     <div class="main main-raised mt-4">
         <div class="section section-basic">
+            <div class="alert alert-primary">
+                <div class="container">
+                    <!--<div class="alert-icon">-->
+                        <!--<i class="material-icons">info_outline</i>-->
+                    <!--</div>-->
+                    <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+                        <!--<span aria-hidden="true"><i class="material-icons">clear</i></span>-->
+                    <!--</button>-->
+
+                    You are about to test this new way to review solution as a customer in a safe testnet environment. You have the opportunity to simulate a review (not a real one - because it’s a Beta - actually) about a fictional order you had on a website you like (Nike, for exemple).
+                    Now, you can choose a seller and a marketplace, in order to write a review. Have fun !
+                </div>
+            </div>
             <div v-if="!order.id" class="container">
                 <div class="title"><h2>1. Simulate an order</h2></div>
 
@@ -11,7 +24,7 @@
                         <div class="form-group">
                             <label for="selectedMarketplace">Choose a marketplace</label>
 
-                            <select class="form-control selectpicker" data-style="btn btn-link"
+                            <select class="form-control" data-style="btn btn-link"
                                     v-model="selectedMarketplaceId" id="selectedMarketplace">
                                 <option v-for="marketplace in marketplaces" :value="marketplace.id">
                                     {{marketplace.name}}
@@ -22,7 +35,8 @@
                         <div class="form-group">
                             <label for="selectedSeller">Choose a seller</label>
 
-                            <select class="form-control selectpicker" data-style="btn btn-link" v-model="selectedSellerId"
+                            <select class="form-control" data-style="btn btn-link"
+                                    v-model="selectedSellerId"
                                     id="selectedSeller">
                                 <option v-for="seller in sellers" :value="seller.id">
                                     {{seller.name}}
@@ -40,7 +54,8 @@
 
             <div v-if="order.id" class="container mt-5">
 
-                <div class="title"><h2>2. Give your opinion on {{order.seller.name}} from {{order.marketplace.name}}</h2></div>
+                <div class="title"><h2>2. Give your opinion on {{order.seller.name}} from
+                    {{order.marketplace.name}}</h2></div>
 
                 <form>
 
@@ -57,7 +72,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="comment"><h3>Votre commentaire</h3></label>
+                        <label for="comment"><h3>Your comment</h3></label>
                         <textarea v-model="review.text" class="form-control" id="comment" rows="8"></textarea>
                     </div>
                 </form>
@@ -92,6 +107,7 @@
 </template>
 
 <script>
+
   import ModalInstallMetamask from '../components/ModalInstallMetamask';
   import ModalEnterMetamaskPassword from '../components/ModalEnterMetamaskPassword';
   import SignMetamaskTransactionPassword from '../components/SignMetamaskTransactionPassword';
@@ -122,6 +138,13 @@
       if (this.$route.query.order_id)
         this.axios.get('/api/orders/' + this.$route.query.order_id).then((response) => {
           this.order = response.data;
+          let cookieReview = this.$cookie.get('review');
+          if (cookieReview !== null) {
+            this.review = JSON.parse(cookieReview).review;
+            this.order.marketplace.marketplace_criteria = JSON.parse(cookieReview).criteria;
+            this.$cookie.delete('review');
+            this.submitCertifiedReview();
+          }
         });
       this.axios.get('/api/sellers').then((response) => {
         this.sellers = response.data;
@@ -131,14 +154,6 @@
         this.marketplaces = response.data;
         this.selectedMarketplaceId = this.marketplaces[0].id
       });
-    },
-    created() {
-      let cookieReview = this.$cookie.get('review');
-      if (cookieReview !== null) {
-        this.review = JSON.parse(cookieReview);
-        this.$cookie.delete('review');
-        this.submitCertifiedReview();
-      }
     },
     methods: {
 
@@ -179,7 +194,10 @@
       },
 
       modalMetamaskValidate() {
-        this.$cookie.set('review', JSON.stringify(this.review), {expires: '10m'});
+        this.$cookie.set('review', JSON.stringify({
+          review: this.review,
+          criteria: this.order.marketplace.marketplace_criteria
+        }), {expires: '10m'});
         window.location.href = '/reviews/new?order_id=' + this.order.id
       },
 
@@ -213,7 +231,7 @@
           marketplace_id: this.selectedMarketplaceId,
           seller_id: this.selectedSellerId
         }).then((response) => {
-          this.axios.get('/api/orders/'+response.data.id).then((response) => {
+          this.axios.get('/api/orders/' + response.data.id).then((response) => {
             context.order = response.data
           });
         });

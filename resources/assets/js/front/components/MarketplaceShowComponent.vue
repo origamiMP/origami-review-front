@@ -1,7 +1,7 @@
-<template xmlns:on="http://www.w3.org/1999/xhtml">
+<template>
     <div class="profile-page">
         <div class="page-header header-filter" data-parallax="true"
-             :style="'margin-top: -20px;height: 300px; background-image: url('+ seller.image_cover +');'"></div>
+             :style="'margin-top: -20px;height: 300px; background-image: url('+ marketplace.image_cover +');'"></div>
 
         <div class="main main-raised">
             <div class="profile-content">
@@ -10,11 +10,11 @@
                         <div class="col-md-6 ml-auto mr-auto">
                             <div class="profile">
                                 <div class="avatar">
-                                    <img :src="seller.image_profile" alt="Circle Image"
+                                    <img :src="marketplace.image_profile" alt="Circle Image"
                                          class="img-raised rounded-circle img-fluid">
                                 </div>
                                 <div class="name">
-                                    <h3 class="title">{{seller.name}}</h3>
+                                    <h3 class="title">{{marketplace.name}}</h3>
                                 </div>
                             </div>
                         </div>
@@ -23,7 +23,7 @@
 
                         <ul class="nav nav-pills justify-content-center">
                             <li class="nav-item"><a class="nav-link active" href="#pill1" data-toggle="tab">Origami Reviews</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#pill2" data-toggle="tab">External reviews</a>
+                            <li class="nav-item"><a class="nav-link" href="#pill2" data-toggle="tab">External Reviews</a>
                             </li>
                         </ul>
                         <div class="mt-3 tab-content tab-space">
@@ -41,8 +41,8 @@
                                             <div class="col-md-3"></div>
                                             <div class="col-md-6">
                                                 <star-rating-component
-                                                        v-model="seller.average_rating"
-                                                        :input-name="seller.name + 'Rating'"
+                                                        v-model="marketplace.average_rating"
+                                                        :input-name="marketplace.name + 'Rating'"
                                                         font-size="60px" :disabled="true"/>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
-                            <div v-for="review in seller.reviews" class="card" style="margin-bottom: 20px"
+                            <div v-for="review in marketplace.reviews" class="card" style="margin-bottom: 20px"
                                  v-bind:class="{certified: review.wallet}">
                                 <div class="card-body">
                                     <div class="row">
@@ -122,14 +122,14 @@
                                                                    :disabled="true"/>
                                         </div>
                                         <div class="col-md-9" style="margin: auto;">
-                                            <span class="text-gray float-right">published on {{review.created_at}}</span>
+                                            <span class="text-gray float-right">Published on {{review.created_at}}</span>
 
                                         </div>
                                     </div>
                                     <hr/>
                                     <div>{{review.text}}</div>
                                     <div class="text-gray float-right" style="text-align: right">
-                                        <div>Ordered on <router-link :to="'/marketplaces/' + review.order.marketplace.id">{{review.order.marketplace.name}}</router-link></div>
+                                        <div>Seller : <router-link :to="'/sellers/'+ review.order.seller.id">{{review.order.seller.name}}</router-link></div>
                                         <div v-if="review.wallet" style="font-size: 12px !important">
                                             <i style="font-size: 12px !important" class="material-icons">lock</i> IPSF node id : {{review.ddb_node_id}}
                                         </div>
@@ -159,25 +159,25 @@
                             <!--</nav>-->
                         </div>
                         <div class="col-md-4">
-                            <div v-if="seller.description || seller.website_link" class="card"
+                            <div v-if="marketplace.description || marketplace.website_link" class="card"
                                  style="margin-bottom: 20px">
                                 <div class="card-body">
-                                    <h4><b>{{seller.name}}</b></h4>
-                                    <p>{{seller.description}}</p>
+                                    <h4><b>{{marketplace.name}}</b></h4>
+                                    <p>{{marketplace.description}}</p>
                                     <div class="text-center">
-                                        <button :href="seller.website_link" class="btn btn-round btn-primary">Visit
-                                            {{seller.name}}
+                                        <button :href="marketplace.website_link" class="btn btn-round btn-primary">Visit
+                                            {{marketplace.name}}
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="seller.email || seller.phone || seller.address" class="card"
+                            <div v-if="marketplace.email || marketplace.phone || marketplace.address" class="card"
                                  style="margin-bottom: 20px">
                                 <div class="card-body">
                                     <h4><b>Contact information :</b></h4>
-                                    <div>Write to : <a :href="seller.email">{{seller.email}}</a></div>
-                                    <div>Call : {{seller.phone}}</div>
-                                    <div>Find us : {{seller.address}}</div>
+                                    <div>Write to : <a :href="marketplace.email">{{marketplace.email}}</a></div>
+                                    <div>Call : {{marketplace.phone}}</div>
+                                    <div>Find us : {{marketplace.address}}</div>
                                     <div class="text-center">
                                         <button class="mr-3 btn btn-default btn-fab btn-fab-mini btn-round"><i
                                                 class="fa fa-facebook"></i></button>
@@ -204,37 +204,38 @@
     components: {StarRatingComponent},
     data() {
       return {
-        seller: {
+        marketplace: {
           reviews: []
         },
       }
     },
     created() {
-      this.axios.get('/api/sellers/' + this.$route.params.id).then((response) => {
-        this.seller = response.data;
+      this.axios.get('/api/marketplaces/' + this.$route.params.id).then((response) => {
+        console.log(response.data);
+        this.marketplace = response.data;
       });
     },
     computed: {
       fiveRatingRatio() {
-        return parseFloat(this.seller.five_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.marketplace.five_rating_reviews_ratio) * 100 + '%'
       },
       fourRatingRatio() {
-        return parseFloat(this.seller.four_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.marketplace.four_rating_reviews_ratio) * 100 + '%'
       },
       threeRatingRatio() {
-        return parseFloat(this.seller.three_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.marketplace.three_rating_reviews_ratio) * 100 + '%'
       },
       twoRatingRatio() {
-        return parseFloat(this.seller.two_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.marketplace.two_rating_reviews_ratio) * 100 + '%'
       },
       oneRatingRatio() {
-        return parseFloat(this.seller.one_rating_reviews_ratio) * 100 + '%'
+        return parseFloat(this.marketplace.one_rating_reviews_ratio) * 100 + '%'
       },
       countTrustedReviews() {
-        return this.seller.reviews.length;
+        return this.marketplace.reviews.length;
       },
       trustedReviewScoreQualifier() {
-        switch (this.seller.average_verified_rating) {
+        switch (this.marketplace.average_verified_rating) {
           case 1:
             return 'Poor';
           case 2:

@@ -4,18 +4,18 @@
       <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
         <stats-card data-background-color="blue">
           <template slot="header">
-            <md-icon >store</md-icon>
+            <md-icon >shopping_basket</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Nombre de commandes</p>
+            <p class="category">Order number</p>
             <h3 class="title">3627</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>date_range</md-icon>
-              Cette année
+              This year
             </div>
           </template>
         </stats-card>
@@ -23,18 +23,18 @@
       <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
         <stats-card data-background-color="orange">
           <template slot="header">
-            <md-icon >content_copy</md-icon>
+            <md-icon >message</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Nombre d'avis Origami</p>
+            <p class="category">Origami Review number</p>
             <h3 class="title">572</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>date_range</md-icon>
-              Cette année
+              This year
             </div>
           </template>
         </stats-card>
@@ -46,14 +46,14 @@
           </template>
 
           <template slot="content">
-            <p class="category">Note Origami</p>
+            <p class="category">Origami Rating</p>
             <h3 class="title">4,75/5</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>update</md-icon>
-              Mis à jour il y a 3 minutes
+              Updated 3 minutes ago
             </div>
           </template>
         </stats-card>
@@ -61,18 +61,18 @@
       <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
         <stats-card data-background-color="secondary">
           <template  slot="header">
-            <i class="fab fa-twitter"></i>
+            <md-icon >star</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Note Externe</p>
+            <p class="category">External Rating</p>
             <h3 class="title">4,41/5</h3>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>update</md-icon>
-              Mis à jour il y a 3 minutes
+              Updated 3 minutes ago
             </div>
           </template>
         </stats-card>
@@ -85,16 +85,16 @@
           :chart-type="'Bar'"
           data-background-color="blue">
           <template slot="content">
-            <h4 class="title">Nombre de commandes</h4>
+            <h4 class="title">Order number</h4>
               <p class="category">
-                <span class="text-success"><i class="fas fa-long-arrow-alt-up"></i> 55% </span> augmentation du nombre de commande ce mois
+                <span class="text-success"><i class="fas fa-long-arrow-alt-up"></i> 55% </span> order number increase this month
               </p>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>access_time</md-icon>
-              mis à jour il y a 4 minutes
+              updated 4 minutes ago
             </div>
           </template>
         </chart-card>
@@ -106,16 +106,16 @@
           :chart-type="'Bar'"
           data-background-color="orange">
           <template slot="content">
-            <h4 class="title">Nombre d'avis Origami</h4>
+            <h4 class="title">Origami Review number</h4>
               <p class="category">
-                <span class="text-success"><i class="fas fa-long-arrow-alt-up"></i> 55% </span> augmentation du nombre d'avis Origami ce mois
+                <span class="text-success"><i class="fas fa-long-arrow-alt-up"></i> 55% </span> Origami Review number increase this month
               </p>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>access_time</md-icon>
-              mis à jour il y a 4 minutes
+              updated 4 minutes ago
             </div>
           </template>
         </chart-card>
@@ -128,16 +128,16 @@
           :chart-type="'Line'"
           data-background-color="primary">
           <template slot="content">
-            <h4 class="title">Evolution de la note globale Origami</h4>
+            <h4 class="title">Origami global rating evolution</h4>
               <p class="category">
-                Ne prends pas en compte les avis externes
+                Without external reviews
               </p>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>access_time</md-icon>
-              mis à jour il y a  10 minutes
+              updated 10 minutes ago
             </div>
           </template>
         </chart-card>
@@ -150,16 +150,16 @@
           :chart-type="'Line'"
           data-background-color="secondary">
           <template slot="content">
-            <h4 class="title">Evolution de la note externe</h4>
+            <h4 class="title">External global rating evolution</h4>
               <p class="category">
-                Ne prends pas en compte les avis Origami
+                Without Origami Reviews
               </p>
           </template>
 
           <template slot="footer">
             <div class="stats">
               <md-icon>access_time</md-icon>
-              mis à jour il y a  10 minutes
+              updated 10 minutes ago
             </div>
           </template>
         </chart-card>

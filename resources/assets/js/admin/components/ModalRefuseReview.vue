@@ -1,7 +1,7 @@
 <template>
     <div>
         <md-dialog :md-active.sync="showModal">
-            <md-dialog-title>Quelle est la raison de votre refus ?</md-dialog-title>
+            <md-dialog-title>What's your refusal reason ?</md-dialog-title>
 
             <div class="md-layout-item md-size-100">
                 <md-field maxlength="10">
@@ -10,7 +10,7 @@
 
             </div>
             <md-dialog-actions>
-                <md-button class="md-primary" @click.native="validateAction">Envoyer</md-button>
+                <md-button class="md-primary" @click.native="validateAction">Send</md-button>
             </md-dialog-actions>
         </md-dialog>
     </div>

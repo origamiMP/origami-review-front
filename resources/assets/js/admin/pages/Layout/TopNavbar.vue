@@ -45,7 +45,7 @@
               <!--<p class="hidden-lg hidden-md">Profile</p>-->
             <!--</md-list-item>-->
             <md-list-item>
-              <md-button href="/">Accéder au site ></md-button>
+              <md-button style="color: white !important;" :href="'/sellers/' + this.$root.currentUser.organization.id">Access to my shop ></md-button>
             </md-list-item>
           </md-list>
         </div>

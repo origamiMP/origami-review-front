@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Laravel Vue CRUD Application</title>
+  <title>Origami Review</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/images/origami_review_logo.png" />
   <link href="{{mix('css/front.css')}}" rel="stylesheet" type="text/css">
   <link href="{{mix('css/app.css')}}" rel="stylesheet" type="text/css">
 </head>

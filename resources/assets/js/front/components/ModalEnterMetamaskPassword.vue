@@ -1,7 +1,9 @@
 <template>
     <modal :showModal="showModal" :closeAction="closeAction">
-        <h1 slot="header">Enter Metamask Password</h1>
-        <span slot="body">You have to enter metamask password</span>
+        <h3 slot="header">Enter Metamask Password</h3>
+        <div slot="body">
+            <img style="height: auto; width: 100%" src="/images/metamask_password.gif"/>
+        </div>
         <div slot="footer">
             <button @click="validateAction" class="btn btn-primary">I have enter metamask password</button>
         </div>
