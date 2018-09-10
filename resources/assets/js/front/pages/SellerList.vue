@@ -1,5 +1,5 @@
 <template>
-    <div class="ecommerce-page">
+    <div class="ecommerce-page sidebar-collapse">
         <div class="page-header header-filter header-small" data-parallax="true"
              style="background-image: url('/images/city.jpg'); transform: translate3d(0px, 0px, 0px);">
             <div class="container">
