@@ -15,7 +15,7 @@ import routes from './routes/routes'
 // Plugins
 import GlobalComponents from './globalComponents'
 import GlobalDirectives from './globalDirectives'
-import Notifications from './components/NotificationPlugin'
+// import Notifications from './components/NotificationPlugin'
 
 // MaterialDashboard plugin
 import MaterialDashboard from './material-dashboard'
@@ -33,7 +33,7 @@ Vue.use(VueRouter)
 Vue.use(MaterialDashboard)
 Vue.use(GlobalComponents)
 Vue.use(GlobalDirectives)
-Vue.use(Notifications)
+// Vue.use(Notifications)
 Vue.use(VeeValidate, {
   events: "input|blur"
 });

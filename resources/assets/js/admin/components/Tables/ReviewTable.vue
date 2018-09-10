@@ -6,11 +6,17 @@
                 <md-table-cell md-label="Rating">
                     <star-rating-component :value="item.rating" :input-name="item.id + 'Rating'" :disabled="true"/>
                 </md-table-cell>
-                <md-table-cell md-label="State">{{ item.review_state.name }}</md-table-cell>
+                <md-table-cell md-label="State">
+                    <md-icon v-if="item.review_state.name === 'ACCEPTED'">done</md-icon>
+                    <md-icon v-if="item.review_state.name === 'CERTIFIED'">done</md-icon>
+                    <md-icon v-if="item.review_state.name === 'CREATED'">hourglass_empty</md-icon>
+                    <md-icon v-if="item.review_state.name === 'CLEAR'">clear</md-icon>
+                </md-table-cell>
                 <md-table-cell md-label="Created_at">{{ item.created_at }}</md-table-cell>
                 <md-table-cell>
                     <md-button :to="'/admin/reviews/' + item.id" class="md-primary md-just-icon">
-                        <md-icon>edit</md-icon>
+                        <md-icon v-if="item.review_state.name === 'ACCEPTED'">visibility</md-icon>
+                        <md-icon v-else>edit</md-icon>
                     </md-button>
                 </md-table-cell>
             </md-table-row>

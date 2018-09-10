@@ -4,7 +4,7 @@
             <div class="col-lg-4 col-md-6 ml-auto mr-auto">
                 <div class="card card-login">
                     <div class="card-header card-header-primary text-center">
-                        <h4 class="card-title">Connectez-vous !</h4>
+                        <h4 class="card-title">Login !</h4>
                     </div>
                     <div class="card-body mt-2 mb-3">
                         <CustomInput
@@ -13,7 +13,7 @@
                                 inputName="email"
                                 v-model="user.email"
                                 inputValidationRules="required|email"
-                                input-placeholder="Votre adresse email..."
+                                input-placeholder="Your email address..."
                         />
                         <CustomInput
                                 inputGroupMaterialIcon="lock_outline"
@@ -21,11 +21,11 @@
                                 v-model="user.password"
                                 inputValidationRules="required"
                                 inputType="password"
-                                input-placeholder="Votre mot de passe..."
+                                input-placeholder="Your password..."
                         />
                     </div>
                     <div class="mb-4 text-center">
-                        <button v-on:click="logIn" class="btn btn-primary btn-wd btn-lg">Je me connecte</button>
+                        <button v-on:click="logIn" class="btn btn-primary btn-wd btn-lg">Login</button>
                     </div>
                 </div>
             </div>

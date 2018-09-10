@@ -81,7 +81,12 @@
                             <hr/>
                             <div class="md-layout md-gutter">
                                 <div class="md-layout-item md-size-25"><b>State</b></div>
-                                <div class="md-layout-item">{{review.review_state.name}}</div>
+                                <div class="md-layout-item">
+                                    <md-icon v-if="review.review_state.name === 'ACCEPTED'">done</md-icon>
+                                    <md-icon v-if="review.review_state.name === 'CERTIFIED'">done</md-icon>
+                                    <md-icon v-if="review.review_state.name === 'CREATED'">hourglass_empty</md-icon>
+                                    <md-icon v-if="review.review_state.name === 'CLEAR'">clear</md-icon>
+                                </div>
                             </div>
                             <hr/>
                             <div class="md-layout md-gutter">
@@ -97,8 +102,8 @@
                                 <div class="md-layout-item">{{review.text}}</div>
                             </div>
                         </md-card-content>
-                        <md-card-actions md-alignment="space-between">
-                            <div v-if="review.review_state.name === 'CREATED'">
+                        <md-card-actions v-if="review.review_state.name === 'CREATED'" md-alignment="space-between">
+                            <div>
                                 <md-button @click.native="showModal = true">Refuse review</md-button>
                             </div>
 

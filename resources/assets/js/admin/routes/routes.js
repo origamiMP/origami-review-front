@@ -35,29 +35,6 @@ const routes = [
         name: 'Review',
         component: ReviewShow
       },
-      {
-        path: '/admin/typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
-        path: '/admin/icons',
-        name: 'Icons',
-        component: Icons
-      },
-      {
-        path: '/admin/maps',
-        name: 'Maps',
-        meta: {
-          hideFooter: true
-        },
-        component: Maps
-      },
-      {
-        path: '/admin/notifications',
-        name: 'Notifications',
-        component: Notifications
-      }
     ]
   }
 ];
