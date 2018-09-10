@@ -16,10 +16,10 @@
                 <div v-if="!this.$root.currentUser.email" class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav float-right ml-auto mt-2 mt-lg-0">
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/auth/register">S'inscrire</router-link>
+                            <router-link class="nav-link" to="/auth/register">Register</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/auth/login">Se connecter</router-link>
+                            <router-link class="nav-link" to="/auth/login">Log In</router-link>
                         </li>
                     </ul>
                 </div>
