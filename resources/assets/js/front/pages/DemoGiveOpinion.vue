@@ -10,8 +10,10 @@
                         <!--<span aria-hidden="true"><i class="material-icons">clear</i></span>-->
                     <!--</button>-->
 
-                    You are about to test this new way to review solution as a customer in a safe testnet environment. You have the opportunity to simulate a review (not a real one - because it’s a Beta - actually) about a fictional order you had on a website you like (Nike, for exemple).
-                    Now, you can choose a seller and a marketplace, in order to write a review. Have fun !
+                    <p>You are about to test this new way to review solution as a customer in a safe testnet environment. You have the opportunity to simulate a review (not a real one - because it’s a Beta - actually) about a fictional order you had on a website you like (Nike, for exemple).
+                        Now, you can choose a seller and a marketplace, in order to write a review. Have fun !</p>
+                    <p>PS : In order to fully experiment our solution, you should choose the seller "demo" to have an access to your review in the back-office !"</p>
+
                 </div>
             </div>
             <div v-if="!order.id" class="container">
