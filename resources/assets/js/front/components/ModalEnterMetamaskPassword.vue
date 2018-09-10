@@ -5,7 +5,7 @@
             <img style="height: auto; width: 100%" src="/images/metamask_password.gif"/>
         </div>
         <div slot="footer">
-            <button @click="validateAction" class="btn btn-primary">I have enter metamask password</button>
+            <button @click="validateAction" class="btn btn-primary">I have entered metamask password</button>
         </div>
     </modal>
 </template>
