@@ -102,13 +102,13 @@
                                 <div class="md-layout-item">{{review.text}}</div>
                             </div>
                         </md-card-content>
-                        <md-card-actions v-if="review.review_state.name === 'CREATED'" md-alignment="space-between">
+                        <md-card-actions md-alignment="space-between">
                             <div>
-                                <md-button @click.native="showModal = true">Refuse review</md-button>
+                                <md-button v-if="review.review_state.name === 'CREATED'" @click.native="showModal = true">Refuse review</md-button>
                             </div>
 
                             <md-card-expand-trigger>
-                                <md-button @click.native="accept" class="md-success">Accept review</md-button>
+                                <md-button v-if="review.review_state.name !== 'ACCEPTED' && review.review_state.name !== 'CERTIFIED'" @click.native="accept" class="md-success">Accept review</md-button>
                             </md-card-expand-trigger>
                         </md-card-actions>
                     </md-card>
